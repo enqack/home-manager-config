@@ -1,0 +1,63 @@
+
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
+set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+
+let g:netrw_home = $XDG_DATA_HOME."/vim"
+call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
+set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
+
+set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
+set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
+
+if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
+
+let mapleader=" "
+
+" Basic settings
+set term=xterm-256color
+set encoding=utf-8
+set mouse=a
+syntax on
+"set number
+"set termguicolors
+colorscheme desert
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText ctermbg=NONE
+
+" Use system clipboard
+set clipboard+=unnamedplus
+
+" Tab settings
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+" Enable and disable auto comment
+map <leader>c :setlocal formatoptions-=cro<CR>
+map <leader>C :setlocal formatoptions=cro<CR>
+
+" Enable and disable auto indent
+map <leader>i :setlocal autoindent<CR>
+map <leader>I :setlocal noautoindent<CR>
+
+" Autocompletion
+set wildmode=longest,list,full
+
+" Enable spell checking, s for spell check
+map <leader>s :setlocal spell! spelllang=en_us<CR>
+
+" Spell check
+"map <leader>p :!clear && spellcheck %<CR>
+
+"Alias replace all to
+nnoremap <A-s> :%s//gI<Left><Left><Left>
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+

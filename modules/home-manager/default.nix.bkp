@@ -1,0 +1,48 @@
+{ config, pkgs, lib, ... }:
+
+let
+  # Wrapper script to export DBUS_SESSION_BUS_ADDRESS and run notify-send
+  notifyScript = ''
+    #!/run/current-system/sw/bin/bash
+    export DBUS_SESSION_BUS_ADDRESS=$(printenv DBUS_SESSION_BUS_ADDRESS)
+    ${pkgs.libnotify}/bin/notify-send "$1" "$2"
+  '';
+
+in
+{
+  home.file.".local/bin/notify-wrapper" = {
+    text = notifyScript;
+    executable = true;
+  };
+
+  systemd.user = {
+    services.home-manager-rebuild = {
+      Unit = {
+        Description = "Rebuild Home Manager Configuration";
+      };
+      Service = {
+        Type = "oneshot";
+        ExecStartPre = "${pkgs.bash}/bin/bash -c '${config.home.homeDirectory}/.local/bin/notify-wrapper \"Home Manager\" \"Starting Rebuild\"'";
+        ExecStart = "${pkgs.home-manager}/bin/home-manager switch --flake .config/nixos";
+        ExecStartPost = "${pkgs.bash}/bin/bash -c '${config.home.homeDirectory}/.local/bin/notify-wrapper \"Home Manager\" \"Rebuild Complete\"'";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+
+    timers.home-manager-rebuild-timer = {
+      Unit = {
+        Description = "Hourly Timer for Home Manager Rebuild";
+      };
+      Timer = {
+        OnCalendar = "hourly";
+        Persistent = true;
+      };
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
+    };
+  };
+}
+
