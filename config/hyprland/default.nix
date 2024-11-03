@@ -101,5 +101,9 @@
     recursive = true;
     source = ./conf.d;
   };
+
+  wayland.windowManager.hyprland.plugins = [
+    "hyprfocus"
+  ];
 }
 

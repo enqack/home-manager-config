@@ -2,7 +2,7 @@
   description = "Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  # Specify the branch
+    nixpkgs.url = "github:NixOS/nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +15,7 @@
     homeConfigurations = {
       sysop = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          system = "x86_64-linux";  # Specify the system
+          system = "x86_64-linux";
           overlays = [
             (self: super: { legacyPackages.x86_64-linux = super.x86_64-linux; })
             hyprpanel.overlay

@@ -40,8 +40,52 @@
     jetbrains.goland
     jetbrains.pycharm-professional
     libgtop
+    youtube-music
+    zscroll
   ];
-
+  
+  programs.wlogout = {
+    enable = true;
+    layout = [
+      {
+        label = "lock";
+        action = "hyprlock";
+        text = "Lock";
+        keybind = "l";
+      }
+      {
+        label = "hibernate";
+        action = "systemctl hibernate";
+        text = "Hibernate";
+        keybind = "h";
+      }
+      {
+        label = "logout";
+        action = "hyprctl dispatch exit";
+        text = "Logout";
+        keybind = "e";
+      }
+      {
+        label = "shutdown";
+        action = "systemctl poweroff";
+        text = "Shutdown";
+        keybind = "s";
+      }
+      {
+        label = "suspend";
+        action = "systemctl suspend";
+        text = "Suspend";
+        keybind = "u";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot";
+        keybind = "r";
+      }
+    ];
+  };
+  
   services.hyprpaper = {
     enable = true;
     settings = {
@@ -59,7 +103,7 @@
     settings = {
       main = {
         output = "eDP-1";
-        font = "DejaVuSansMono Nerd Font:size=18";
+        font = "JetBrainsMono Nerd Font:size=18";
         prompt = "'Search Applications: '";
         icons-enabled = false;
         show-actions = true;
@@ -152,12 +196,11 @@
   };
 
   imports = [
-    ./modules/conky
-    ./modules/home-manager
-    ./modules/hyprland
-    ./modules/lf
-    ./modules/vim
+    ./config/conky
+    ./config/home-manager
+    ./config/hyprland
+    ./config/lf
+    ./config/vim
   ];
-
 }
 
