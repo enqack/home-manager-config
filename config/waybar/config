@@ -1,0 +1,146 @@
+[{
+  "id": "primary",
+  "name": "primary",
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 36, // Waybar height (to be removed for auto height)
+  "spacing": 15, // Gaps between modules (in px)
+  "reload_sytle_on_change": true,
+
+  "output": "eDP-1",
+
+  // Choose the order of the modules
+  "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "disk#root", "disk#home", "wireplumber", "tray"],
+
+  // Modules configuration
+  "custom/logo": {
+    "format": " ",
+    "return-type": "plain"
+  },
+  "hyprland/workspaces": {
+    "show-special": true
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "{:%a %Y-%m-%d %H:%M:%S}",
+    "interval": 1,
+    "on-click": "$TERMINAL --title waybar-float -e calcurse"
+  },
+  "custom/packageupdates": {
+    "exec": "$HOME/.scripts/waybar/packageupdates",
+    "interval": 3600 // 1 hour
+  },
+  "cpu": {
+    "format": "<span foreground='#b8bb26'>CPU:</span> {usage}%",
+    "interval": 5,
+    "states": {
+      "normal": 0,
+      "watch": 20,
+      "warning": 50,
+      "critical": 80
+    },
+  },
+  "memory": {
+    "format": "<span foreground='#d65d9e'>MEM:</span> {}%",
+    "interval": 5,
+      "states": {
+        "normal": 0,
+        "watch": 20,
+        "warning": 50,
+        "critical": 80
+      },
+  },
+  "battery": {
+    "format": "BAT: {capacity}%",
+    "tooltip-format": "{time}",
+    "interval": 10,
+    "states": {
+      "watch": 50,
+      "warning": 25,
+      "critical": 10
+    }
+  },
+  "disk#root": {
+      "path": "/",
+      "format": "<span foreground='#00ffff'>/:</span> {percentage_used}%",
+      "interval": 60
+  },
+  "disk#home": {
+      "path": "/home",
+      "format": "<span foreground='#00ffff'>/home:</span> {percentage_used}%",
+      "interval": 60
+  },
+  "wireplumber": {
+      "format": "VOL: {volume}%",
+      "scroll-step": 0.5
+  },
+  "tray": {
+       "format": "<span foreground='#D3C6AA'>{icon}</span>",
+       "icon-size": 20,
+       "spacing": 5
+  }
+},
+{
+  "id": "primary-bottom",
+  "name": "primary-bottom",
+  "layer": "top",
+  "position": "bottom",
+  "height": 36,
+  "spacing": 15,
+
+  "output": "eDP-1",
+  "start_hidden": true,
+
+  "modules-left": [],
+  "modules-center": [],
+  "modules-right": ["custom/loadavg"],
+
+  // Modules configuration
+  "custom/loadavg": {
+      "exec": "cat /proc/loadavg | awk '{split($0, la, \" \"); print \"Load:\", la[1], la[2], la[3]}'",
+      "interval": 5
+  }
+},
+{
+  "name": "secondary",
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 36, // Waybar height (to be removed for auto height)
+  "spacing": 15, // Gaps between modules (in px)
+  "reload_sytle_on_change": true,
+
+  "output": "DP-:",
+
+  // Choose the order of the modules
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/btcprice", "custom/ethprice", "custom/uniprice"],
+
+  // Modules configuration
+  "hyprland/window": {
+      "format": "{title}",
+      "separate-outputs": true
+  },
+  "clock": {
+      "format": "{:%a, %Y-%m-%d %H:%M:%S}",
+      "interval": 1,
+      "on-click": "$TERMINAL --title waybar-float -e calcurse"
+  },
+  "custom/btcprice": {
+      "exec": "$HOME/.scripts/polybar/polycoin",
+      "interval": 3600  // 1 hour
+  },
+  "custom/ethprice": {
+      "exec": "$HOME/.scripts/polybar/polycoin --token ETH",
+      "interval": 3600
+  },
+  "custom/uniprice": {
+      "exec": "$HOME/.scripts/polybar/polycoin --token UNI",
+      "interval": 3600
+  }
+}]
