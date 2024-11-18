@@ -40,7 +40,7 @@
 
   programs.hyprpaper = {
     enable = true;
-    wallpaper = [ "eDP-1,~/Pictures/backgrounds/crinkled-paper.png" ];
+    wallpaper = [ "eDP-1,~/Pictures/backgrounds/nix-snowflake-dark-night-transparent.png" ];
   };
   
   imports = [
