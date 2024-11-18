@@ -19,6 +19,7 @@ window#waybar {
 .modules-right {
 	background-color: #1f1f1f;
   margin: 5px 10px 0 5px;
+  padding-right: 5px;
   border: 0.5px #a80301 solid;
 }
 

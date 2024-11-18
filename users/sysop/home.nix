@@ -24,23 +24,11 @@
     youtube-music
     zscroll
   ];
-  
-  home.activation.cloneRepos = lib.mkAfter ''
-    repos=(
-      "https://github.com/enqack/.scripts.git $HOME/.scripts"
-      "https://github.com/enqack/.dotfiles.git $HOME/.dotfiles"
-    )
 
-    for repo in "$repos[@]"; do
-      url=$(echo "$repo" | cut -d' ' -f1)
-      dir=$(echo "$repo" | cut -d' ' -f2)
-      if [ ! -d "$dir" ]; then
-        ${pkgs.git}/bin/git clone "$url" "$dir"
-      else
-        (cd "$dir" && ${pkgs.git}/bin/git pull)
-      fi
-    done
-  '';
+  programs.hyprstart = {
+    enable = true;
+    vtnr = 1;
+  };
 
   programs.hyprpaper = {
     enable = true;
@@ -60,6 +48,7 @@
     ../../config/zsh
 
     ../../modules/hyprpaper
+    ../../modules/hyprstart
 
     ../../git-config.nix
   ];

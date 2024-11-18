@@ -3,7 +3,7 @@
   "name": "primary",
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 36, // Waybar height (to be removed for auto height)
+  "height": 40, // Waybar height (to be removed for auto height)
   "spacing": 15, // Gaps between modules (in px)
   "reload_sytle_on_change": true,
 
@@ -110,7 +110,7 @@
   "name": "secondary",
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 36, // Waybar height (to be removed for auto height)
+  "height": 40, // Waybar height (to be removed for auto height)
   "spacing": 15, // Gaps between modules (in px)
   "reload_sytle_on_change": true,
 
