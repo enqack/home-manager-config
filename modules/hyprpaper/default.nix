@@ -15,7 +15,7 @@
     services.hyprpaper = {
       enable = true;
       settings = {
-        # get first list  element of each wallpaper string element
+        # get first list element of each wallpaper string element; the monitor sub-string
         preload = map (w: builtins.elemAt (lib.strings.splitString "," w) 1) config.programs.hyprpaper.wallpaper;
         wallpaper = config.programs.hyprpaper.wallpaper;
       };
