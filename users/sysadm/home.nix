@@ -19,6 +19,7 @@
     go
     htop
     libgtop
+    rsstail
     zscroll
   ];
 

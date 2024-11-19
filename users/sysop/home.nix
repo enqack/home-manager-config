@@ -22,6 +22,7 @@
     jetbrains.pycharm-professional
     libgtop
     youtube-music
+    rsstail
     zscroll
   ];
 

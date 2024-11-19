@@ -118,17 +118,21 @@
 
   "start_hidden": false,
 
-  "modules-left": ["custom/uptime"],
+  "modules-left": ["custom/userhost"],
   "modules-center": ["custom/ticker"],
   "modules-right": ["custom/loadavg"],
 
   // Modules configuration
+  "custom/userhost": {
+    "exec": "echo ${USER}@$(hostname).$(hostname -f)",
+    "return-type": "plain"
+  },
   "custom/uptime": {
     "exec": "uptime | tr ',' ' ' | cut -f4-8 -d' ' | sed 's/.*/\\u&/'",
     "interval": 60
   },
   "custom/ticker": {
-    "exec": "$HOME/waybar-zscroll",
+    "exec": "$HOME/.scripts/waybar/waybar-zscroll $HOME/.scripts/waybar/scroll-text.txt",
     "escape": true,
     "max-length": 100
   },
