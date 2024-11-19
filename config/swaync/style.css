@@ -1,0 +1,24 @@
+@define-color cc-bg rgba(31, 31, 31, 0.8);
+
+.control-center {
+  margin: 10px 10px;
+  border-color: #a80301;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.notification-row .notification-background {
+  padding: 5px 5px;
+}
+
+.notification {
+  transition: all 500ms ease;
+  border-color: #a80301;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  margin: 5px 5px 0px 5px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
+  padding: 0;
+}

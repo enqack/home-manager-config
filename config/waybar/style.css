@@ -15,7 +15,6 @@ window#waybar {
   margin: 5px;
 }
 
-/*-----module groups----*/
 .modules-right {
 	background-color: #1f1f1f;
   margin: 5px 10px 0 5px;
@@ -36,6 +35,31 @@ window#waybar {
   border: 0.5px #a80301 solid;
 }
 
+window#waybar.primary-bottom {
+  background: rgba(31, 31, 31, 1);
+  margin: 5px;
+}
+
+.primary-bottom .modules-right {
+	background-color: #1f1f1f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
+
+.primary-bottom .modules-center {
+	background-color: #1f1f1f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
+
+.primary-bottom .modules-left {
+	background-color: #1f1f1f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
 
 /*-----modules indv----*/
 #workspaces button {
@@ -52,6 +76,9 @@ window#waybar {
 	background-color: rgba(168,3,1,0.5);
 }
 
+#workspaces button.focused {
+	background-color: rgba(0,153,0,1);
+}
 
 
 #hyprland_window,

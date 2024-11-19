@@ -88,7 +88,6 @@
     hyprpicker
     hyprshot
     hyprutils
-    swaynotificationcenter
     xdg-desktop-portal
     xdg-desktop-portal-hyprland
   ];

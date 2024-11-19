@@ -39,6 +39,7 @@
     ../../config/home-manager
     ../../config/hyprland
     ../../config/lf
+    ../../config/swaync
     ../../config/vim
     ../../config/waybar
     ../../config/wlogout

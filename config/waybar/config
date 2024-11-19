@@ -12,7 +12,7 @@
   // Choose the order of the modules
   "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "disk#root", "disk#home", "wireplumber", "tray"],
+  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "disk#root", "disk#home", "wireplumber", "tray", "custom/notification"],
 
   // Modules configuration
   "custom/logo": {
@@ -29,7 +29,8 @@
   "clock": {
     "format": "{:%a %Y-%m-%d %H:%M:%S}",
     "interval": 1,
-    "on-click": "$TERMINAL --title waybar-float -e calcurse"
+    "on-click": "$TERMINAL --title waybar-float -e calcurse",
+    "pass-through": true
   },
   "custom/packageupdates": {
     "exec": "$HOME/.scripts/waybar/packageupdates",
@@ -83,6 +84,26 @@
        "format": "<span foreground='#D3C6AA'>{icon}</span>",
        "icon-size": 20,
        "spacing": 5
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon} ",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
 },
 {
@@ -90,20 +111,30 @@
   "name": "primary-bottom",
   "layer": "top",
   "position": "bottom",
-  "height": 36,
+  "height": 40,
   "spacing": 15,
 
   "output": "eDP-1",
-  "start_hidden": true,
 
-  "modules-left": [],
-  "modules-center": [],
+  "start_hidden": false,
+
+  "modules-left": ["custom/uptime"],
+  "modules-center": ["custom/ticker"],
   "modules-right": ["custom/loadavg"],
 
   // Modules configuration
+  "custom/uptime": {
+    "exec": "uptime | tr ',' ' ' | cut -f4-8 -d' ' | sed 's/.*/\\u&/'",
+    "interval": 60
+  },
+  "custom/ticker": {
+    "exec": "$HOME/waybar-zscroll",
+    "escape": true,
+    "max-length": 100
+  },
   "custom/loadavg": {
-      "exec": "cat /proc/loadavg | awk '{split($0, la, \" \"); print \"Load:\", la[1], la[2], la[3]}'",
-      "interval": 5
+    "exec": "cat /proc/loadavg | awk '{split($0, la, \" \"); print \"Load:\", la[1], la[2], la[3]}'",
+    "interval": 5
   }
 },
 {
