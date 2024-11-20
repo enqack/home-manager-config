@@ -12,7 +12,7 @@
   // Choose the order of the modules
   "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "disk#root", "disk#home", "wireplumber", "tray", "custom/notification"],
+  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "wireplumber", "tray", "custom/notification"],
 
   // Modules configuration
   "custom/logo": {

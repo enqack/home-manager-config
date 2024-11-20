@@ -6,10 +6,6 @@
   border-radius: 5px;
 }
 
-window {
-	/*font-weight: bold;*/
-}
-
 window#waybar {
   background: rgba(0, 0, 0, 0);
   margin: 5px;
@@ -19,24 +15,25 @@ window#waybar {
 	background-color: #1f1f1f;
   margin: 5px 10px 0 5px;
   padding-right: 5px;
-  border: 0.5px #a80301 solid;
+  border: 0.5px #cacaca solid;
 }
 
 .modules-center {
 	background-color: #1f1f1f;
   margin: 5px 0 0 0;
-  border: 0.5px #a80301 solid;
+  border: 0.5px #cacaca solid;
 }
 
 .modules-left {
   margin: 5px 5px 0 10px;
   padding-left: 5px;
 	background-color: #1f1f1f;
-  border: 0.5px #a80301 solid;
+  border: 0.5px #cacaca solid;
 }
 
 window#waybar.primary-bottom {
   background: rgba(31, 31, 31, 1);
+  border-top: 0.5px #cacaca solid;
   margin: 5px;
 }
 
@@ -92,16 +89,10 @@ window#waybar.primary-bottom {
 #pulseaudio,
 #custom-media,
 #tray,
-#mode,
 #custom-power,
 #custom-menu,
 #idle_inhibitor {
     margin: 0 5px;
-}
-
-#mode {
-    color: #cc3436;
-    font-weight: bold;
 }
 
 #custom-power {
