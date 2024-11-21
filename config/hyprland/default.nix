@@ -1,7 +1,69 @@
 { config, pkgs, ... }:
 
 {
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = ''
+
+      env = XDG_CURRENT_DESKTOP, Hyprland
+      env = XDG_SESSION_TYPE, wayland
+      env = XDG_SESSION_DESKTOP, Hyprland
+      env = QT_QPA_PLATFORM, wayland
+      env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
+      env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
+      
+      #env = LIBVA_DRIVER_NAME,nvidia
+      #env = GBM_BACKEND,nvidia-drm
+      #env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+
+      exec-once = dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME
+      exec-once = systemctl --user import-environment DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME
+
+      exec-once = systemctl --user stop xdg-desktop-portal.service
+      exec-once = systemctl --user start xdg-desktop-portal-hyperland.service
+      exec-once = systemctl --user start xdg-desktop-portal.service
+      
+      exec-once = hyprpaper
+      exec-once = hypridle
+
+      exec-once = hyprctl setcursor redglass 32
+
+      exec-once = waybar
+      exec-once = swaync
+
+      exec-once = blueman-applet
+
+      exec-once = conky -q -c $HOME/.config/conky/conkyrc
+
+      # Set programs
+      $terminal = alacritty
+      $editor = emacs
+      $menu = fuzzel
+
+      #env = XCURSOR_SIZE,32
+      #env = XCURSOR_THEME,redglass
+
+      source = ./conf.d/cursor.conf
+      source = ./conf.d/debug.conf
+      source = ./conf.d/monitor.conf
+      source = ./conf.d/general.conf
+      source = ./conf.d/device.conf
+      source = ./conf.d/input.conf
+      source = ./conf.d/gestures.conf
+      source = ./conf.d/layouts.conf
+      source = ./conf.d/workspaces.conf
+      source = ./conf.d/windowrules.conf
+      source = ./conf.d/animations.conf
+      source = ./conf.d/decoration.conf
+      source = ./conf.d/misc.conf
+      source = ./conf.d/binds.conf
+
+      source = ./conf.d/plugins.conf
+    '';
+  };
+
   programs.hyprlock.enable = true;
+  
   programs.hyprlock.settings = {
     background = [
       {
@@ -78,9 +140,9 @@
       }
     ];
   };
+  
 
   home.packages = with pkgs; [
-    hyprland
     hyprcursor
     hyprdim
     hyprpanel
@@ -90,20 +152,16 @@
     hyprutils
     xdg-desktop-portal
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
   ];
-
-  home.file.".config/hypr/hyprland.conf" = {
-    text = builtins.readFile ./hyprland.conf;
-    executable = false;
-  };
 
   home.file.".config/hypr/conf.d" = {
     recursive = true;
     source = ./conf.d;
   };
 
-  wayland.windowManager.hyprland.plugins = [
-    "hyprfocus"
-  ];
+  # wayland.windowManager.hyprland.plugins = [
+  #   "hyprfocus"
+  # ];
 }
 

@@ -62,11 +62,12 @@ window#waybar.primary-bottom {
 #workspaces button {
   padding: 1px 5px;
   background-color: transparent;
+  transition: background-color 0.2s;
 }
 
 #workspaces button:hover {
-  box-shadow: inherit;
 	background-color: rgba(0,153,0,1);
+  transition: background-color 0.2s;
 }
 
 #workspaces button.active {
@@ -78,41 +79,41 @@ window#waybar.primary-bottom {
 }
 
 
-#hyprland_window,
 
+#window,
 #clock,
 #battery,
 #cpu,
 #memory,
 #temperature,
 #network,
-#pulseaudio,
+#pipewire,
 #custom-media,
 #tray,
 #custom-power,
 #custom-menu,
 #idle_inhibitor {
-    margin: 0 5px;
+  padding: 0 5px 0 5px;
 }
 
 #custom-power {
-    background-color: rgba(0,119,179,0.6);
-    border-radius: 100px;
-    margin: 5px 5px;
-    padding: 1px 1px 1px 6px;
+  background-color: rgba(0,119,179,0.6);
+  border-radius: 100px;
+  margin: 5px 5px;
+  padding: 1px 1px 1px 6px;
 }
 
 /*-----Indicators----*/
 #idle_inhibitor.activated {
-    color: #2dcc36;
+  color: #2dcc36;
 }
 
 #pulseaudio.muted {
-    color: #cc3436;
+  color: #cc3436;
 }
 
 #battery.charging {
-    color: #2dcc36;
+  color: #2dcc36;
 }
 
 #battery.warning:not(.charging) {
@@ -120,31 +121,30 @@ window#waybar.primary-bottom {
 }
 
 #battery.critical:not(.charging) {
-    color: #cc3436;
+  color: #cc3436;
 }
 
 #temperature.critical {
-    color: #cc3436;
+  color: #cc3436;
 }
 
 #cpu.normal,
 #memory.normal {
-    color: #00ff00;
+  color: #00ff00;
 }
 
 #cpu.watch,
 #memory.watch {
-    color: #00ffff;
+  color: #00ffff;
 }
 
 #cpu.warning,
 #memory.warning {
-    color: #ffa500;
+  color: #ffa500;
 }
 
 #cpu.critical,
 #memory.critical {
-    color: #ff0000;
+  color: #ff0000;
 }
-
 

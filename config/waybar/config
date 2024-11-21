@@ -61,6 +61,7 @@
     "tooltip-format": "{time}",
     "interval": 10,
     "states": {
+      "normal": 80,
       "watch": 50,
       "warning": 25,
       "critical": 10
@@ -89,13 +90,13 @@
     "tooltip": false,
     "format": "{icon} ",
     "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
+      "notification": "<sup>🔴</sup>",
       "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-notification": "<sup>🔴</sup>",
       "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-notification": "<sup>🔴</sup>",
       "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-notification": "<sup>🔴</sup>",
       "dnd-inhibited-none": ""
     },
     "return-type": "json",

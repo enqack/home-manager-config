@@ -1,18 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   home.username = "sysop";
   home.homeDirectory = "/home/sysop";
-
-  home.stateVersion = "24.05";
-
-  home.sessionVariables = {
-    PATH = "$PATH:~/.local/bin";
-  };
-
-  xdg.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     go
@@ -23,6 +13,7 @@
     libgtop
     youtube-music
     rsstail
+    russ
     zscroll
   ];
 
@@ -37,20 +28,7 @@
   };
   
   imports = [
-    ../../config/alacritty
-    ../../config/conky
-    ../../config/fuzzel
-    ../../config/home-manager
-    ../../config/hyprland
-    ../../config/lf
-    ../../config/swaync
-    ../../config/vim
-    ../../config/waybar
-    ../../config/wlogout
-    ../../config/zsh
-
-    ../../modules/hyprpaper
-    ../../modules/hyprstart
+    ../../profiles/base
 
     ../../git-config.nix
   ];
