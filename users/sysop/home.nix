@@ -26,6 +26,10 @@
     enable = true;
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/crinkled-paper.png" ];
   };
+
+  pam.yubico.authorizedYubiKeys.ids = [
+    "vvcccbldbvtd"
+  ];
   
   imports = [
     ../../profiles/base

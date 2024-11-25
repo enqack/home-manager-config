@@ -22,7 +22,11 @@
     enable = true;
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/nix-snowflake-dark-night-transparent.png" ];
   };
-  
+
+  pam.yubico.authorizedYubiKeys.ids = [
+    "vvcccbldbvtd"
+  ];
+
   imports = [
     ../../profiles/base
 
