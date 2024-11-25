@@ -37,7 +37,7 @@
 
       # Set programs
       $terminal = alacritty
-      $editor = emacs
+      $editor = vim
       $menu = fuzzel
 
       #env = XCURSOR_SIZE,32

@@ -10,6 +10,10 @@
         duration = 1;
       };
 
+      font.normal = {
+        family = "JetBrainsMono Nerd Font";
+
+      };
       font.size = 16;
 
       colors = {

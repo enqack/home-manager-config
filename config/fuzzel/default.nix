@@ -16,15 +16,15 @@
       colors = {
         background = "1f1f1fff";
         text = "ffffffff";
-        match = "a80301ff";
-        selection = "303030ff";
-        selection-text = "ffffffff";
-        selection-match = "a80301ff";
+        match = "1e4620ff";
+        selection = "1f1f1fff";
+        selection-text = "a80301ff";
+        selection-match = "1e4620ff";
         border = "a80301ff";
       };
       border = {
         width = 2;
-        radius = 20;
+        radius = 5;
       };
     };
   };
