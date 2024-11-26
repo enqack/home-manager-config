@@ -133,7 +133,7 @@
     "interval": 60
   },
   "custom/ticker": {
-    "exec": "$HOME/.scripts/waybar/waybar-zscroll $HOME/.scripts/waybar/scroll-text.txt",
+    "exec": "$HOME/.scripts/waybar/waybar-zscroll /var/cache/nixos/nixos-updates.txt",
     "escape": true,
     "max-length": 100
   },
