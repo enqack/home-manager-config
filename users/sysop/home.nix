@@ -27,10 +27,6 @@
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/crinkled-paper.png" ];
   };
 
-  pam.yubico.authorizedYubiKeys.ids = [
-    "vvcccbldbvtd"
-  ];
-
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
