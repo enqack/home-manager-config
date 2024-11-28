@@ -23,14 +23,9 @@
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/nix-snowflake-dark-night-transparent.png" ];
   };
 
-  programs.gpg = {
-    enable = true;
-    homedir = "${config.xdg.dataHome}/gnupg";
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
+  xdg.configFile."Yubico/u2f_keys" = {
+    text = ''
+    '';
   };
 
   imports = [

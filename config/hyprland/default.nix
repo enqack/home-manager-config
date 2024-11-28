@@ -62,6 +62,16 @@
     '';
   };
 
+  xdg.portal = {
+    enable = true;
+    configPackages = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+  };
+
   programs.hyprlock.enable = true;
   
   programs.hyprlock.settings = {

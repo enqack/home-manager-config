@@ -6,7 +6,7 @@
 
   home.packages = with pkgs; [
     go
-    htop
+    hugo
     jetbrains-toolbox
     jetbrains.goland
     jetbrains.pycharm-professional
@@ -16,6 +16,12 @@
     russ
     zscroll
   ];
+
+  home.file.".config/zsh/.zshrc" = {
+    text = ''
+      eval "$(hugo completion zsh)"
+    '';
+  };
 
   programs.hyprstart = {
     enable = true;
@@ -27,15 +33,27 @@
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/crinkled-paper.png" ];
   };
 
-  programs.gpg = {
-    enable = true;
-    homedir = "${config.xdg.dataHome}/gnupg";
+  xdg.configFile."Yubico/u2f_keys" = {
+    text = ''
+    '';
   };
 
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    verbose = true;
+  systemd.user.services = {
+    nestops-sysman = {
+      Unit = {
+        Description = "Serve NestOps System Manual";
+      };
+
+      Service = {
+        WorkingDirectory = "%h/NestOps/nestops-sysman";
+        ExecStart = ''
+          ${pkgs.hugo}/bin/hugo server \
+            --buildDrafts \
+            --buildExpired \
+            --buildFuture
+        '';
+      };
+    };
   };
 
   imports = [
