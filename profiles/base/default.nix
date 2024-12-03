@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -26,6 +26,7 @@
     # https://support.yubico.com/hc/en-us/articles/4819584884124-Resolving-GPG-s-CCID-conflicts
     scdaemonSettings = {
       disable-ccid = true;
+      reader-port = "Yubico Yubi";
     };
   
     # https://github.com/drduh/config/blob/master/gpg.conf
@@ -58,7 +59,7 @@
     # https://github.com/drduh/config/blob/master/gpg-agent.conf
     defaultCacheTtl = 60;
     maxCacheTtl = 120;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentryPackage = pkgs.pinentry-tty;
     extraConfig = ''
       ttyname $GPG_TTY
     '';
