@@ -7,7 +7,7 @@
   "spacing": 15, // Gaps between modules (in px)
   "reload_sytle_on_change": true,
 
-  "output": "eDP-1",
+  "output": "DP-2",
 
   // Choose the order of the modules
   "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window"],
@@ -115,7 +115,7 @@
   "height": 40,
   "spacing": 15,
 
-  "output": "eDP-1",
+  "output": "DP-2",
 
   "start_hidden": false,
 
@@ -150,7 +150,7 @@
   "spacing": 15, // Gaps between modules (in px)
   "reload_sytle_on_change": true,
 
-  "output": "DP-:",
+  "output": "DP-1",
 
   // Choose the order of the modules
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
@@ -168,15 +168,15 @@
       "on-click": "$TERMINAL --title waybar-float -e calcurse"
   },
   "custom/btcprice": {
-      "exec": "$HOME/.scripts/polybar/polycoin",
+      "exec": "$HOME/.scripts/waybar/polycoin",
       "interval": 3600  // 1 hour
   },
   "custom/ethprice": {
-      "exec": "$HOME/.scripts/polybar/polycoin --token ETH",
+      "exec": "$HOME/.scripts/waybar/polycoin -t ETH",
       "interval": 3600
   },
   "custom/uniprice": {
-      "exec": "$HOME/.scripts/polybar/polycoin --token UNI",
+      "exec": "$HOME/.scripts/waybar/polycoin -t UNI",
       "interval": 3600
   }
 }]

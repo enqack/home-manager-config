@@ -54,7 +54,7 @@
   };
 
   services.gpg-agent = {
-    enable = true;
+    enable = false;
     enableSshSupport = true;
     # https://github.com/drduh/config/blob/master/gpg-agent.conf
     defaultCacheTtl = 60;
@@ -73,7 +73,9 @@
     ../../config/hyprland
     ../../config/lf
     ../../config/swaync
+    ../../config/ulauncher
     ../../config/waybar
+    ../../config/wayfire
     ../../config/wezterm
     ../../config/wlogout
     ../../config/zsh

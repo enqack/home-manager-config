@@ -1,0 +1,179 @@
+[{
+  "id": "primary",
+  "name": "primary",
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 40, // Waybar height (to be removed for auto height)
+  "spacing": 15, // Gaps between modules (in px)
+  "reload_sytle_on_change": true,
+
+  "output": "DP-2",
+
+  // Choose the order of the modules
+  "modules-left": ["custom/logo", "niri/workspaces", "niri/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/packageupdates", "cpu", "memory", "battery", "wireplumber", "tray", "custom/notification"],
+
+  // Modules configuration
+  "custom/logo": {
+    "format": " ",
+    "return-type": "plain"
+  },
+  "niri/window": {
+    "format": "{title}",
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "{:%a %Y-%m-%d %H:%M:%S}",
+    "interval": 1,
+    "on-click": "$TERMINAL --title waybar-float -e calcurse",
+    "pass-through": true
+  },
+  "custom/packageupdates": {
+    "exec": "$HOME/.scripts/waybar/packageupdates",
+    "interval": 3600 // 1 hour
+  },
+  "cpu": {
+    "format": "<span foreground='#b8bb26'>CPU:</span> {usage}%",
+    "interval": 5,
+    "states": {
+      "normal": 0,
+      "watch": 20,
+      "warning": 50,
+      "critical": 80
+    },
+  },
+  "memory": {
+    "format": "<span foreground='#d65d9e'>MEM:</span> {}%",
+    "interval": 5,
+      "states": {
+        "normal": 0,
+        "watch": 20,
+        "warning": 50,
+        "critical": 80
+      },
+  },
+  "battery": {
+    "format": "BAT: {capacity}%",
+    "tooltip-format": "{time}",
+    "interval": 10,
+    "states": {
+      "normal": 80,
+      "watch": 50,
+      "warning": 25,
+      "critical": 10
+    }
+  },
+  "disk#root": {
+      "path": "/",
+      "format": "<span foreground='#00ffff'>/:</span> {percentage_used}%",
+      "interval": 60
+  },
+  "disk#home": {
+      "path": "/home",
+      "format": "<span foreground='#00ffff'>/home:</span> {percentage_used}%",
+      "interval": 60
+  },
+  "wireplumber": {
+      "format": "VOL: {volume}%",
+      "scroll-step": 0.5
+  },
+  "tray": {
+       "format": "<span foreground='#D3C6AA'>{icon}</span>",
+       "icon-size": 20,
+       "spacing": 5
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon} ",
+    "format-icons": {
+      "notification": "<sup>🔴</sup>",
+      "none": "",
+      "dnd-notification": "<sup>🔴</sup>",
+      "dnd-none": "",
+      "inhibited-notification": "<sup>🔴</sup>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<sup>🔴</sup>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+},
+{
+  "id": "primary-bottom",
+  "name": "primary-bottom",
+  "layer": "top",
+  "position": "bottom",
+  "height": 40,
+  "spacing": 15,
+
+  "output": "DP-2",
+
+  "start_hidden": false,
+
+  "modules-left": ["custom/userhost"],
+  "modules-center": ["custom/ticker"],
+  "modules-right": ["custom/loadavg"],
+
+  // Modules configuration
+  "custom/userhost": {
+    "exec": "echo \"<span foreground='yellow'>${USER}</span><span foreground='green'>@</span><span foreground='blue'>$(hostname).$(hostname -f)</span>\"",
+    "return-type": "plain"
+  },
+  "custom/uptime": {
+    "exec": "uptime | tr ',' ' ' | cut -f4-8 -d' ' | sed 's/.*/\\u&/'",
+    "interval": 60
+  },
+  "custom/ticker": {
+    "exec": "$HOME/.scripts/waybar/waybar-zscroll /var/cache/nixos/nixos-updates.txt",
+    "escape": true,
+    "max-length": 100
+  },
+  "custom/loadavg": {
+    "exec": "cat /proc/loadavg | awk '{split($0, la, \" \"); print \"Load:\", la[1], la[2], la[3]}'",
+    "interval": 5
+  }
+},
+{
+  "name": "secondary",
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 40, // Waybar height (to be removed for auto height)
+  "spacing": 15, // Gaps between modules (in px)
+  "reload_sytle_on_change": true,
+
+  "output": "DP-1",
+
+  // Choose the order of the modules
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/btcprice", "custom/ethprice", "custom/uniprice"],
+
+  // Modules configuration
+  "hyprland/window": {
+      "format": "{title}",
+      "separate-outputs": true
+  },
+  "clock": {
+      "format": "{:%a, %Y-%m-%d %H:%M:%S}",
+      "interval": 1,
+      "on-click": "$TERMINAL --title waybar-float -e calcurse"
+  },
+  "custom/btcprice": {
+      "exec": "$HOME/.scripts/waybar/polycoin",
+      "interval": 3600  // 1 hour
+  },
+  "custom/ethprice": {
+      "exec": "$HOME/.scripts/waybar/polycoin -t ETH",
+      "interval": 3600
+  },
+  "custom/uniprice": {
+      "exec": "$HOME/.scripts/waybar/polycoin -t UNI",
+      "interval": 3600
+  }
+}]

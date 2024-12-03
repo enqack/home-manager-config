@@ -1,0 +1,150 @@
+* {
+  border: none;
+  font-family: Font Awesome, JetBrainsMono Nerd Font, Arial, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0);
+  margin: 5px;
+}
+
+.modules-right {
+	background-color: #1f1f00;
+  margin: 5px 10px 0 5px;
+  padding-right: 5px;
+  border: 0.5px #cacaca solid;
+}
+
+.modules-center {
+	background-color: #1f001f;
+  margin: 5px 0 0 0;
+  border: 0.5px #cacaca solid;
+}
+
+.modules-left {
+  margin: 5px 5px 0 10px;
+  padding-left: 5px;
+	background-color: #1f001f;
+  border: 0.5px #cacaca solid;
+}
+
+window#waybar.primary-bottom {
+  background: rgba(31, 31, 31, 1);
+  border-top: 0.5px #cacaca solid;
+  margin: 5px;
+}
+
+.primary-bottom .modules-right {
+	background-color: #1f001f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
+
+.primary-bottom .modules-center {
+	background-color: #1f001f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
+
+.primary-bottom .modules-left {
+	background-color: #1f001f;
+  margin: 5px 10px 5px 5px;
+  padding-right: 5px;
+  border: none;
+}
+
+/*-----modules indv----*/
+#workspaces button {
+  padding: 1px 5px;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+#workspaces button:hover {
+	background-color: rgba(0,153,0,1);
+  transition: background-color 0.2s;
+}
+
+#workspaces button.active {
+	background-color: rgba(168,3,1,0.5);
+}
+
+#workspaces button.focused {
+	background-color: rgba(0,153,0,1);
+}
+
+
+
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pipewire,
+#custom-media,
+#tray,
+#custom-power,
+#custom-menu,
+#idle_inhibitor {
+  padding: 0 5px 0 5px;
+}
+
+#custom-power {
+  background-color: rgba(0,119,179,0.6);
+  border-radius: 100px;
+  margin: 5px 5px;
+  padding: 1px 1px 1px 6px;
+}
+
+/*-----Indicators----*/
+#idle_inhibitor.activated {
+  color: #2dcc36;
+}
+
+#pulseaudio.muted {
+  color: #cc3436;
+}
+
+#battery.charging {
+  color: #2dcc36;
+}
+
+#battery.warning:not(.charging) {
+	color: #e6e600;
+}
+
+#battery.critical:not(.charging) {
+  color: #cc3436;
+}
+
+#temperature.critical {
+  color: #cc3436;
+}
+
+#cpu.normal,
+#memory.normal {
+  color: #00ff00;
+}
+
+#cpu.watch,
+#memory.watch {
+  color: #00ffff;
+}
+
+#cpu.warning,
+#memory.warning {
+  color: #ffa500;
+}
+
+#cpu.critical,
+#memory.critical {
+  color: #ff0000;
+}
+
