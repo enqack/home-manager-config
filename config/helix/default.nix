@@ -2,10 +2,10 @@
 
 {
   programs.helix = {
-    enable = ture;
-    settings = [
+    enable = true;
+    settings = {
         theme = "base16_default";
-    ]; 
+    };
   };
 }
 

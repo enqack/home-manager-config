@@ -96,7 +96,12 @@
       extraConfig = lib.fileContents ./extra-config.lfrc;
     };
 
-    environment.systemPackages = with pkgs; [
+    home.file.".local/bin/lfrun" = {
+      source = ./lfrun;
+      executable = true;
+    };
+    
+    home.packages = with pkgs; [
       ueberzugpp
       ffmpegthumbnailer
       imagemagick

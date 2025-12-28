@@ -12,47 +12,47 @@ window#waybar {
 }
 
 .modules-right {
-	background-color: #1f1f00;
+	background-color: #6943ff;
   margin: 5px 10px 0 5px;
   padding-right: 5px;
-  border: 0.5px #cacaca solid;
+  border: 0.5px #ffffff solid;
 }
 
 .modules-center {
-	background-color: #1f001f;
+	background-color: #6943ff;
   margin: 5px 0 0 0;
-  border: 0.5px #cacaca solid;
+  border: 0.5px #ffffff solid;
 }
 
 .modules-left {
   margin: 5px 5px 0 10px;
   padding-left: 5px;
-	background-color: #1f001f;
-  border: 0.5px #cacaca solid;
+	background-color: #6943ff;
+  border: 0.5px #ffffff solid;
 }
 
 window#waybar.primary-bottom {
-  background: rgba(31, 31, 31, 1);
-  border-top: 0.5px #cacaca solid;
+  background: #6943ff;
+  border-top: 0.5px #ffffff solid;
   margin: 5px;
 }
 
 .primary-bottom .modules-right {
-	background-color: #1f001f;
+	background-color: #6943ff;
   margin: 5px 10px 5px 5px;
   padding-right: 5px;
   border: none;
 }
 
 .primary-bottom .modules-center {
-	background-color: #1f001f;
+	background-color: #6943ff;
   margin: 5px 10px 5px 5px;
   padding-right: 5px;
   border: none;
 }
 
 .primary-bottom .modules-left {
-	background-color: #1f001f;
+	background-color: #6943ff;
   margin: 5px 10px 5px 5px;
   padding-right: 5px;
   border: none;
@@ -66,16 +66,16 @@ window#waybar.primary-bottom {
 }
 
 #workspaces button:hover {
-	background-color: rgba(0,153,0,1);
+	background-color: #f92a1c;
   transition: background-color 0.2s;
 }
 
 #workspaces button.active {
-	background-color: rgba(168,3,1,0.5);
+	background-color: #ff77ff;
 }
 
 #workspaces button.focused {
-	background-color: rgba(0,153,0,1);
+	background-color: #f92a1c;
 }
 
 

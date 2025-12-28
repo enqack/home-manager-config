@@ -125,7 +125,7 @@
 
   // Modules configuration
   "custom/userhost": {
-    "exec": "echo \"<span foreground='yellow'>${USER}</span><span foreground='green'>@</span><span foreground='blue'>$(hostname).$(hostname -f)</span>\"",
+    "exec": "echo \"<span foreground='yellow'>${USER}</span><span foreground='blue'>@</span><span foreground='green'>$(hostname -f)</span>\"",
     "return-type": "plain"
   },
   "custom/uptime": {

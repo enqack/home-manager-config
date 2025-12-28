@@ -1,27 +1,30 @@
-{ pkgs, pkgs-unstable, config, inputs, ... }:
+## flake.nix
+#
+# inputs = {
+#     dms.url = "github:AvengeMedia/DankMaterialShell";
+#     dms.inputs.nixpkgs.follows = "nixpkgs-unstable";    
+# };
+
+{ lib, pkgs, pkgs-unstable, config, inputs, ... }:
 
 { 
-  options.app.mangowc.enable = lib.mkEnableOption "mangowc";
-
-  inputs = {
-    dms.url = "github:AvengeMedia/DankMaterialShell";
-    dms.inputs.nixpkgs.follows = "nixpkgs";    
+  options.app.mangowc = {
+    enable = lib.mkEnableOption "mangowc";
   };
-  
-  config = lib.mkIf (config.app.niri.enable) {
 
   imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.mangowc
+    inputs.dms.homeModules.dankMaterialShell.default
   ];
+
+  config = lib.mkIf (config.app.niri.enable) {
 
     home.packages = with pkgs; [
       mangowc
     ];
 
     programs.dankMaterialShell = {
-        enable = true;
-        quickshell.package = pkgs-unstable.quickshell;
+      enable = true;
+      quickshell.package = pkgs-unstable.quickshell;
     };
   };
 }

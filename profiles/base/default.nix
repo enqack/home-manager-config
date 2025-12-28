@@ -5,8 +5,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  xdg.enable = true;
-  
+  xdg = {
+    enable = true;
+    autostart.enable = true;
+    userDirs.createDirectories = true;
+  };
+
   home.sessionVariables = {
     PATH = "$PATH:~/.local/bin";
     BAT_THEME = "twodark";
@@ -14,21 +18,21 @@
 
   home.pointerCursor = {
     gtk.enable = true;
-    package = pkgs.xorg.xcursorthemes;
-    name = "redglass";
-    size = 64;
+    package = lib.mkDefault pkgs.xorg.xcursorthemes;
+    name = lib.mkDefault "redglass";
+    size = lib.mkDefault 64;
   };
 
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
-  
+
     # https://support.yubico.com/hc/en-us/articles/4819584884124-Resolving-GPG-s-CCID-conflicts
     scdaemonSettings = {
       disable-ccid = true;
       reader-port = "Yubico Yubi";
     };
-  
+
     # https://github.com/drduh/config/blob/master/gpg.conf
     settings = {
       personal-cipher-preferences = "AES256 AES192 AES";
@@ -59,21 +63,36 @@
     # https://github.com/drduh/config/blob/master/gpg-agent.conf
     defaultCacheTtl = 60;
     maxCacheTtl = 120;
-    pinentryPackage = pkgs.pinentry-tty;
+    pinentry.package = pkgs.pinentry-tty;
     extraConfig = ''
       ttyname $GPG_TTY
     '';
+  };
+
+  applications.lf.enable = true;
+
+  home.packages = with pkgs; [
+    adwaita-qt6
+    adwsteamgtk
+  ];
+
+  gtk = {
+    enable = true;
+  };
+
+  qt = {
+    enable = true;
   };
 
   imports = [
     ../../config/alacritty
     ../../config/conky
     ../../config/fuzzel
-    ../../config/home-manager
+    #../../config/home-manager
+    ../../config/helix
     ../../config/hyprland
-    ../../config/lf
     ../../config/swaync
-    ../../config/ulauncher
+    ../../config/walker
     ../../config/waybar
     ../../config/wayfire
     ../../config/wezterm
@@ -82,6 +101,7 @@
 
     ../../modules/hyprpaper
     ../../modules/hyprstart
+    ../../modules/lf
 
     ../../git-config.nix
   ];

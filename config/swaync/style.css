@@ -2,7 +2,7 @@
 
 .control-center {
   margin: 10px 10px;
-  border-color: #a80301;
+  border-color: #f92a1c;
   border-width: 2px;
   border-style: solid;
   border-radius: 5px;
@@ -14,7 +14,7 @@
 
 .notification {
   transition: all 500ms ease;
-  border-color: #a80301;
+  border-color: #f92a1c;
   border-width: 2px;
   border-style: solid;
   border-radius: 5px;

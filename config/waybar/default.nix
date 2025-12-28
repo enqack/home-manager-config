@@ -16,7 +16,7 @@
   };
 
   home.file.".config/waybar/style.css" = {
-    text = builtins.readFile ./style.css;
+    text = builtins.readFile ./nightreign-style.css;
     executable = false;
   };
 }

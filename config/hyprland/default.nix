@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   wayland.windowManager.hyprland = {
@@ -19,10 +19,9 @@
         "systemctl --user stop xdg-desktop-portal.service"
         "systemctl --user start xdg-desktop-portal-hyperland.service"
         "systemctl --user start xdg-desktop-portal.service"
-        "hyprpaper"
         "hypridle"
         "hyprctl setcursor redglass 32"
-        "waybar"
+        "waybar -c $HOME/.config/waybar/hypr-config"
         "swaync"
         "blueman-applet"
         "conky -q -c $HOME/.config/conky/conkyrc"
@@ -32,8 +31,8 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(a80301ee) rgba(a80301ee) 90deg";
-        "col.inactive_border" = "rgba(1f1f1fee)";
+        "col.active_border" = lib.mkDefault "rgba(a80301ee) rgba(a80301ee) 90deg";
+        "col.inactive_border" = lib.mkDefault "rgba(1f1f1fee)";
         layout = "dwindle";
         allow_tearing = false;
         resize_on_border = true;
@@ -81,7 +80,7 @@
           enabled = true;
           range = 4;
           render_power = 3;
-          color = "rgba(1a1a1aee)";
+          color = lib.mkDefault "rgba(1a1a1aee)";
         };
       };
 
@@ -117,18 +116,23 @@
       };
 
       monitor = [
-        ",preferred,auto,1"
-        "eDP-1,highres,0x1080,1"
-        "HDMI-A-1,highres,0x0,1"
+        "DP-1,highres@120,0x0,1,bitdepth,10"
+        "DP-2,highres@120,0x1440,1,bitdepth,10"
       ];
 
       workspaces = {
         workspace = [
-          "1, monitor:eDP-1, persistent:true"
-          "2, monitor:eDP-1, persistent:true"
-          "3, monitor:eDP-1, persistent:true"
-          "4, monitor:eDP-1, persistent:true"
-          "5, monitor:eDP-1, persistent:true"
+          "1, monitor:DP-2, persistent:true"
+          "2, monitor:DP-2, persistent:true"
+          "3, monitor:DP-2, persistent:true"
+          "4, monitor:DP-2, persistent:true"
+          "5, monitor:DP-2, persistent:true"
+
+          "6, monitor:DP-1, persistent:true"
+          "7, monitor:DP-1, persistent:true"
+          "8, monitor:DP-1, persistent:true"
+          "9, monitor:DP-1, persistent:true"
+          "10, monitor:DP-1, persistent:true"
         ];
       };
 
@@ -177,12 +181,12 @@
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$editor" = "emacs";
-      "$xdgmenu" = "fuzzel";
+      "$xdgmenu" = "walker";
       "$pathmenu" = ''XDG_CURRENT_DESKTOP="*" fuzzel --list-executables-in-path --filter-desktop'';
 
       # 🧠 Descriptive Binds (bindd)
       bindd = [
-        "$mainMod, space, Open XDG applicaton menu, exec, $xdgmenu"
+        "$mainMod, space, Open applicaton menu, exec, $xdgmenu"
         "$mainMod CONTROL, space, Open applicaton menu, exec, $pathmenu"
         "$mainMod, return, Open a terminal, exec, $terminal"
         "$mainMod, E, Open an editor, exec, $editor"
@@ -198,7 +202,6 @@
         "$mainMod, P, pseudo"
         "$mainMod, J, togglesplit"
         "$mainMod, C, centerwindow"
-        "$mainMod, C, resizeactive, exact 75% 75%"
 
         "$mainMod, Tab, focusmonitor, +1"
         "$mainMod SHIFT, Tab, focusmonitor, -1"
@@ -299,25 +302,28 @@
     ];
   };
 
-  programs.hyprlock.enable = true;
-  
+  programs.hyprlock.enable = false;
+
   programs.hyprlock.settings = {
     general = {
       grace = 3;
-      no_fade_in = true;
       immediate_render = true;
+      hide_cursor = true;
     };
-    background = [
+    auth = {
+      "fingerprint:enabled" = true;
+    };
+    background = lib.mkForce [
       {
+      monitor = "";
       path = "screenshot";
       blur_passes = 3;
       blur_size = 7;
-      noise = 0.025;
       }
     ];
     label = [
       {
-      monitor = "";
+      monitor = "DP-4";
       text = "$USER";
       font_size = 32;
       position = "0, 50";
@@ -325,19 +331,19 @@
       valign = "center";
       }
       {
-      monitor = "";
+      monitor = "DP-4";
       text = "Tap security token and enter password.";
       font_size = 16;
-      position = "0, -90";
+      position = "0, -75";
       halign = "center";
       valign = "center";
       }
     ];
-    input-field = [
+    input-field = lib.mkDefault [
       {
-      monitor = "";
-      size = "200, 50";
-      outline_thickness = 5;
+      monitor = "DP-4";
+      size = "100, 50";
+      outline_thickness = 3;
       dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
       dots_spacing = 0.15; # Scale of dots' absolute size, 0.0 - 1.0
       dots_center = false;
@@ -349,7 +355,7 @@
       placeholder_text = "<i>Input Password...</i>"; # Text rendered in the input box when it's empty
       hide_input = false;
       rounding = 10; # -1 means complete rounding (circle/oval)
-      check_color = "rgb(34,136,34)";
+      check_color = "rgb(34, 90, 136)";
       fail_color = "rgb(204,34,34)"; # if authentication failed, changes outer_color and fail message color
       fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>"; # can be set to empty
       fail_transition = 300; # transition time in ms between normal outer_color and fail_color
@@ -360,8 +366,6 @@
       swap_font_color = false;
 
       position = "0, -20";
-      halign = "center";
-      valign = "center";
       }
     ];
   };
@@ -390,12 +394,12 @@
       }
     ];
   };
-  
+
 
   home.packages = with pkgs; [
+    fprintd
     hyprcursor
     hyprdim
-    hyprpanel
     hyprpaper
     hyprpicker
     hyprshot

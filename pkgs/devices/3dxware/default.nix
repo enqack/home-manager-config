@@ -1,4 +1,4 @@
-{ lib, pkgs, stdenv, fetchzip }:
+{ pkgs, stdenv, fetchzip, ... }:
 
 stdenv.mkDerivation {
   pname = "3dxware";
