@@ -15,7 +15,7 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms.url = "github:AvengeMedia/DankMaterialShell";
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
 
     dgop.url = "github:AvengeMedia/dgop";
@@ -68,6 +68,8 @@
 
         modules = [
           niri.homeModules.niri
+          dms.homeModules.dankMaterialShell.default
+          dms.homeModules.dankMaterialShell.niri
           niri.homeModules.stylix
           stylix.homeModules.stylix
           ./users/sysop/home.nix

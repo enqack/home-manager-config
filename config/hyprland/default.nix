@@ -181,7 +181,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$editor" = "emacs";
-      "$xdgmenu" = "walker";
+      "$xdgmenu" = "awelauncher";
       "$pathmenu" = ''XDG_CURRENT_DESKTOP="*" fuzzel --list-executables-in-path --filter-desktop'';
 
       # 🧠 Descriptive Binds (bindd)

@@ -1,18 +1,183 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
-  cfg = config.programs.niri.finalConfig or "";
+  niriCfg = config.programs.niri.finalConfig or "";
+  cfg = config.modules.niri;
 in
 {
-  options.app.niri.enable = lib.mkEnableOption "niri";
+  options.modules.niri = {
+    enable = lib.mkEnableOption "niri";
 
-  config = lib.mkIf (config.app.niri.enable) {
+    outputs = lib.mkOption {
+      type = lib.types.attrs;
+      default = {};
+      description = "Niri outputs setting.";
+    };
+  };
+
+  config = lib.mkIf (config.modules.niri.enable) {
     home.packages = with pkgs; [
       xwayland-satellite
       nautilus
       gnome-keyring
       polkit_gnome
       qt6Packages.qt6ct
+      inputs.awelauncher.packages.x86_64-linux.awelauncher
+      matugen
+      linux-wallpaperengine
     ];
+    
+    programs.dankMaterialShell = {
+      enable = true;
+
+      default.settings = {
+        theme = "blue";
+        matugenScheme = "scheme-monochrome";
+        runUserMatugenTemplates = true;
+        widgetColorMode = "colorful";
+        useFahrenheit = true;
+        dynamicTheming = true;
+
+        barConfigs = [
+          {
+            id = "default";
+            name = "Top";
+            enabled = true;
+            position = 0;
+            screenPreferences = [
+              "all"
+            ];
+            showOnLastDisplay = true;
+            leftWidgets = [
+              {
+                id = "launcherButton";
+                enabled = true;
+              }
+              {
+                id = "workspaceSwitcher";
+                enabled = true;
+              }
+              {
+                id = "focusedWindow";
+                enabled = true;
+                focusedWindowCompactMode = false;
+              }             
+            ];
+            centerWidgets = [
+              {
+                id =  "music";
+                enabled = true;
+              }
+              {
+                id = "clock";
+                enabled = true;
+              }
+              {
+                id = "weather";
+                enabled = true;
+              } 
+            ];
+            rightWidgets = [
+              {
+                id = "controlCenterButton";
+                enabled = true;
+              }
+              {
+                id = "powerMenuButton";
+                enabled = true;
+              }
+            ];
+            spacing = 12;
+            innerPadding = 4;
+            bottomGap = 0;
+            transparency = 0.7;
+            widgetTransparency = 1;
+            squareCorners = false;
+            noBackground = false;
+            gothCornersEnabled = true;
+            gothCornerRadiusOverride = true;
+            gothCornerRadiusValue = 16;
+          }
+          {
+            id = "bottom";
+            name = "Bottom";
+            enabled = true;
+            position = 1;
+            screenPreferences = [
+              {
+                name = "DP-2";
+                model = "Sceptre O35";
+              }
+            ];
+            showOnLastDisplay = false;
+            leftWidgets = [
+              {
+                id = "userathost";
+                enabled = true;
+              }
+            ];
+            centerWidgets = [
+              {
+                id = "dankcommandticker";
+                enabled = true;
+              }
+            ];
+            rightWidgets = [
+              {
+                id = "cpuUsage";
+                enabled = true;
+                minimumWidth = true;
+              }
+            ];
+            spacing = 12;
+            innerPadding = 4;
+            bottomGap = 0;
+            transparency = 0.7;
+            widgetTransparency = 1;
+            squareCorners = false;
+            noBackground = false;
+            gothCornersEnabled = true;
+            gothCornerRadiusOverride = true;
+            gothCornerRadiusValue = 16;
+
+          }
+        ];
+
+      };
+
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
+
+      enableSystemMonitoring = true;
+      enableVPN = true;
+      enableClipboard = true;
+      enableDynamicTheming = true;
+      enableAudioWavelength = true;
+      enableCalendarEvents = true;
+
+      plugins = {
+        userathost = {
+          enable = true;
+          src = pkgs.fetchFromGitHub {
+            owner = "enqack";
+            repo = "dms-plugin-userathost";
+            rev = "v0.1.0";
+            sha256 = "sha256-96ckrhf0KjiavEWaZCDXAdMFX14Af5F03Rn0vnSZSxI=";
+          };
+        };
+        dankcommandticker = {
+          enable = true;
+          src = pkgs.fetchFromGitHub {
+            owner = "enqack";
+            repo = "dms-plugin-dankcommandticker";
+            rev = "v0.1.0";
+            sha256 = "sha256-Ijvu5OYGB1TvElkIcC1659KFBTu/BqUGvGaSoPReVpA=";
+          };
+        };
+      };
+    };
+
     programs.niri = {
       enable = true;
       package = pkgs.niri;
@@ -30,8 +195,6 @@ in
           wait-for-frame-completion-before-queueing = [];
         };
         spawn-at-startup = [
-          { command = ["xwayland-satellite"]; }
-          { command = ["dms" "run" ]; }
           { command = ["awelaunch" "--daemon"]; }
           { command = ["sh" "-c" "conky -q -c $HOME/.config/conky/conkyrc"]; }
         ];
@@ -87,28 +250,7 @@ in
         prefer-no-csd = true;
         cursor.theme = "redglass";
         hotkey-overlay.skip-at-startup = true;
-        outputs = {
-            "DP-1" = {
-                mode = {
-                  height = 1440;
-                  width = 3440;
-                  refresh = 99.998;
-                };
-                focus-at-startup = false;
-                position.x = 0;
-                position.y = 0;
-            };
-            "DP-2" = {
-                mode = {
-                  height = 1440;
-                  width = 3440;
-                  refresh = 120.0;
-                };
-                focus-at-startup = true;
-                position.x = 0;
-                position.y = 1440;
-            };
-        };
+        outputs = cfg.outputs;
         layer-rules = [
           {
             matches = [{
@@ -246,12 +388,12 @@ in
     xdg.configFile.niri-config.enable = lib.mkForce false;
 
     xdg.configFile."niri/config.kdl" = lib.mkForce {
-      enable = true;      
+      enable = true;
       text = ''
-        // DMS integration:
+        //DMS integration
         include "dms/colors.kdl"
 
-        ${cfg}
+        ${niriCfg}
       '';
     };
     

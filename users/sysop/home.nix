@@ -15,7 +15,7 @@
     polarity = "dark";
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/shades-of-purple.yaml";
     opacity.terminal = 0.8;
-    image = ./synthwave-crinkled-paper.png;
+    image = ./pictures/synthwave-crinkled-paper.png;
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.fira-mono;
@@ -111,13 +111,6 @@
     zscroll
     tytools
     terminator
-
-    inputs.dms.packages.x86_64-linux.dms-shell
-    inputs.dgop.packages.x86_64-linux.dgop
-    inputs.awelauncher.packages.x86_64-linux.awelauncher
-    matugen
-    quickshell
-    linux-wallpaperengine
   ];
 
   home.file.".config/zsh/.zshrc" = {
@@ -132,65 +125,10 @@
     compositor = "niri-session -l";
   };
 
-  programs.hyprpaper = {
-    enable = true;
-    wallpaper = [
-      "eDP-1,~/Pictures/backgrounds/crinkled-paper.png"
-      "HDMI-A-1,~/Pictures/backgrounds/crinkled-paper.png"
-    ];
-  };
-
   xdg.configFile."Yubico/u2f_keys" = {
     text = ''
     '';
   };
-
-  xdg.configFile."wofi/style.css".text = ''
-    /* Global window */
-    window {
-      background: rgba(20, 20, 20, 0.88);
-      border-radius: 10px;
-      border: 2px solid #6943ff;
-      padding: 6px;
-      width: 350px;
-      max-height: 500px;
-    }
-
-    /* Prompt area */
-    #input {
-      margin: 6px;
-      padding: 10px;
-      font-size: 1.2em;
-      font-family: "FiraCode Nerd Font";
-      color: #ffffff;
-      border-radius: 6px;
-      border: 1px solid #5352ed;
-    }
-
-    /* Results list */
-    #inner-box {
-      margin-top: 4px;
-    }
-
-    #entry {
-      padding: 8px 10px;
-      font-size: 1.1em;
-      font-family: "FiraCode Nerd Font";
-      color: #e0e0e0;
-    }
-
-    #entry:selected {
-      background-color: #6943ff;
-      color: #ffffff;
-    }
-
-    /* Icons */
-    icon {
-      margin-right: 10px;
-    }
-
-
-  '';
 
   systemd.user.services = {
     enqack-net-dev = {
@@ -232,6 +170,29 @@
     };
   };
 
-  app.niri.enable = true;
+  modules.niri = {
+    enable = true;
+    outputs = {
+        "DP-1" = {
+            mode = {
+              height = 1440;
+              width = 3440;
+              refresh = 99.998;
+            };
+            focus-at-startup = false;
+            position.x = 0;
+            position.y = 0;
+        };
+        "DP-2" = {
+            mode = {
+              height = 1440;
+              width = 3440;
+              refresh = 120.0;
+            };
+            focus-at-startup = true;
+            position.x = 0;
+            position.y = 1440;
+        };
+    };
+  };
 }
-

@@ -8,7 +8,10 @@
   xdg = {
     enable = true;
     autostart.enable = true;
-    userDirs.createDirectories = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
   };
 
   home.sessionVariables = {
@@ -87,12 +90,10 @@
   imports = [
     ../../config/alacritty
     ../../config/conky
-    ../../config/fuzzel
     #../../config/home-manager
     ../../config/helix
-    ../../config/hyprland
+    #../../config/hyprland
     ../../config/swaync
-    ../../config/walker
     ../../config/waybar
     ../../config/wayfire
     ../../config/wezterm
