@@ -72,8 +72,6 @@
     '';
   };
 
-  applications.lf.enable = true;
-
   home.packages = with pkgs; [
     adwaita-qt6
     adwsteamgtk
@@ -88,23 +86,35 @@
   };
 
   imports = [
-    ../../config/alacritty
-    ../../config/conky
-    #../../config/home-manager
-    ../../config/helix
-    #../../config/hyprland
-    ../../config/swaync
-    ../../config/waybar
-    ../../config/wayfire
-    ../../config/wezterm
-    ../../config/wlogout
-    ../../config/zsh
+    ../../modules/applications/alacritty
+    ../../modules/applications/conky
+    #../../modules/applications/home-manager
+    ../../modules/applications/helix
+    #../../modules/applications/hyprland
+    ../../modules/applications/swaync
+    ../../modules/applications/waybar
+    ../../modules/applications/wayfire
+    ../../modules/applications/wezterm
+    ../../modules/applications/wlogout
+    ../../modules/applications/zsh
 
-    ../../modules/hyprpaper
-    ../../modules/hyprstart
-    ../../modules/lf
+    ../../modules/applications/niri
+    ../../modules/applications/hyprpaper
+    ../../modules/applications/hyprstart
+    ../../modules/applications/lf
 
     ../../git-config.nix
   ];
+
+  modules.applications = {
+    alacritty.enable = true;
+    conky.enable = true;
+    helix.enable = true;
+    lf.enable = true;
+    swaync.enable = true;
+    wezterm.enable = true;
+    wlogout.enable = true;
+    zsh.enable = true;
+  };
 }
 

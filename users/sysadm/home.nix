@@ -4,7 +4,7 @@
   imports = [
     ../../profiles/base
 
-    ../../modules/niri
+    ../../modules/applications/niri
     
     ../../git-config.nix
   ];
@@ -67,13 +67,13 @@
     source = ./pictures/crinkled-paper.png;
   };
 
-  programs.hyprstart = {
+  modules.applications.hyprstart = {
     enable = true;
     vtnr = 3;
     compositor = "niri-session -l";
   };
 
-  programs.hyprpaper = {
+  modules.applications.hyprpaper = {
     enable = true;
     wallpaper = [ "eDP-1,~/Pictures/backgrounds/nix-snowflake-dark-night-transparent.png" ];
   };
@@ -83,7 +83,7 @@
     '';
   };
 
-  modules.niri = {
+  modules.applications.niri = {
     enable = true;
     outputs = {
         "DP-1" = {

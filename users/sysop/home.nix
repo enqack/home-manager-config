@@ -4,8 +4,6 @@
   imports = [
     ../../profiles/base
 
-    ../../modules/niri
-
     ../../git-config.nix
   ];
 
@@ -119,7 +117,7 @@
     '';
   };
 
-  programs.hyprstart = {
+  modules.applications.hyprstart = {
     enable = true;
     vtnr = 2;
     compositor = "niri-session -l";
@@ -170,7 +168,7 @@
     };
   };
 
-  modules.niri = {
+  modules.applications.niri = {
     enable = true;
     outputs = {
         "DP-1" = {
