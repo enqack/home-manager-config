@@ -69,7 +69,8 @@
 
   programs.hyprstart = {
     enable = true;
-    vtnr = 2;
+    vtnr = 3;
+    compositor = "niri-session -l";
   };
 
   programs.hyprpaper = {

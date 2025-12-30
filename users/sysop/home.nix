@@ -121,7 +121,7 @@
 
   programs.hyprstart = {
     enable = true;
-    vtnr = 1;
+    vtnr = 2;
     compositor = "niri-session -l";
   };
 
