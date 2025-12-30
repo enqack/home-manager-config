@@ -67,6 +67,11 @@
     source = ./pictures/crinkled-paper.png;
   };
 
+  home.file."Pictures/synthwave-crinkled-paper.png" = {
+    enable = true;
+    source = ./pictures/synthwave-crinkled-paper.png;
+  };
+  
   modules.applications.hyprstart = {
     enable = true;
     vtnr = 3;
