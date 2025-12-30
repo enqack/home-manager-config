@@ -14,7 +14,7 @@
     autoEnable = false;
     polarity = "dark";
     opacity.terminal = 0.8;
-    image = ./pictures/crinkled-paper.png;
+    image = ./pictures/synthwave-crinkled-paper.png;
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.fira-mono;
