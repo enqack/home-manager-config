@@ -116,10 +116,10 @@
             (mkHostModule h)
 
             # Ensure HM knows who/where it is (unless already set)
-            {
-              home.username = h.user;
-              home.homeDirectory = "/home/${h.user}";
-            }
+            #{
+            #  home.username = h.user;
+            #  home.homeDirectory = "/home/${h.user}";
+            #}
           ] ++ h.extraModules;
         };
   in {

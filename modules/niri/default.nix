@@ -314,6 +314,7 @@ in
           "Super+W".action = close-window;
           "Super+M".action = maximize-column;
           "Super+F".action = fullscreen-window;
+          "Super+C".action = center-column;
           "Super+Shift+Left".action = consume-or-expel-window-left;
           "Super+Shift+Right".action = consume-or-expel-window-right;
 
