@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ../../profiles/base
 
-    ../../modules/applications/niri
-    
+    ../../modules/linux/applications/niri
+
     ../../git-config.nix
   ];
 
@@ -14,7 +14,7 @@
     autoEnable = false;
     polarity = "dark";
     opacity.terminal = 0.8;
-    image = ./pictures/synthwave-crinkled-paper.png;
+    image = ./pictures/crinkled-paper.png;
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.fira-mono;
@@ -71,7 +71,7 @@
     enable = true;
     source = ./pictures/synthwave-crinkled-paper.png;
   };
-  
+
   modules.applications.hyprstart = {
     enable = true;
     vtnr = 3;
@@ -84,34 +84,32 @@
   };
 
   xdg.configFile."Yubico/u2f_keys" = {
-    text = ''
-    '';
+    text = "";
   };
 
   modules.applications.niri = {
     enable = true;
     outputs = {
-        "DP-1" = {
-            mode = {
-              height = 1440;
-              width = 3440;
-              refresh = 99.998;
-            };
-            focus-at-startup = false;
-            position.x = 0;
-            position.y = 0;
+      "DP-1" = {
+        mode = {
+          height = 1440;
+          width = 3440;
+          refresh = 99.998;
         };
-        "DP-2" = {
-            mode = {
-              height = 1440;
-              width = 3440;
-              refresh = 120.0;
-            };
-            focus-at-startup = true;
-            position.x = 0;
-            position.y = 1440;
+        focus-at-startup = false;
+        position.x = 0;
+        position.y = 0;
+      };
+      "DP-2" = {
+        mode = {
+          height = 1440;
+          width = 3440;
+          refresh = 120.0;
         };
+        focus-at-startup = true;
+        position.x = 0;
+        position.y = 1440;
+      };
     };
   };
 }
-
