@@ -25,17 +25,27 @@ in
       matugen
       linux-wallpaperengine
     ];
-    
-    programs.dankMaterialShell = {
-      enable = true;
 
-      default.settings = {
+    programs.dank-material-shell = {
+      enable = true;
+      dgop.package = inputs.dgop.packages.x86_64-linux.dgop;
+
+      settings = {
         theme = "blue";
         matugenScheme = "scheme-monochrome";
         runUserMatugenTemplates = true;
         widgetColorMode = "colorful";
         useFahrenheit = true;
         dynamicTheming = true;
+
+        showWorkspaceIndex = true;
+        launcherLogoMode = "os";
+        launcherLogoCustomPath = "";
+        launcherLogoColorOverride = "surface";
+        launcherLogoColorInvertOnMode = false;
+        launcherLogoBrightness = 0.5;
+        launcherLogoContrast = 1;
+        launcherLogoSizeOffset = 0;
 
         barConfigs = [
           {
@@ -96,7 +106,7 @@ in
             gothCornersEnabled = true;
             gothCornerRadiusOverride = true;
             gothCornerRadiusValue = 16;
-          }
+           }
           {
             id = "bottom";
             name = "Bottom";
@@ -104,8 +114,7 @@ in
             position = 1;
             screenPreferences = [
               {
-                name = "DP-2";
-                model = "Sceptre O35";
+                name = "DP-5";
               }
             ];
             showOnLastDisplay = false;
@@ -138,7 +147,6 @@ in
             gothCornersEnabled = true;
             gothCornerRadiusOverride = true;
             gothCornerRadiusValue = 16;
-
           }
         ];
 
@@ -151,7 +159,7 @@ in
 
       enableSystemMonitoring = true;
       enableVPN = true;
-      enableClipboard = true;
+      #enableClipboard = true;
       enableDynamicTheming = true;
       enableAudioWavelength = true;
       enableCalendarEvents = true;
@@ -178,6 +186,11 @@ in
       };
     };
 
+    programs.dsearch = {
+      enable = true;
+      config = {};
+    };
+    
     programs.niri = {
       enable = true;
       package = pkgs.niri;
@@ -295,6 +308,7 @@ in
 
         let
           sh = spawn "sh" "-c";
+          terminal = "${pkgs.alacritty}/bin/alacritty";
         in {
           # Baisc functions
           "Super+Space".action = spawn "awelaunch" "--show" "drun";
@@ -302,7 +316,7 @@ in
           "Super+Control+Space".action = spawn "awelaunch" "--show" "window";
           "Super+Alt+Space".action = spawn "awelaunch" "--show" "ssh";
 
-          "Super+Return".action = spawn "${pkgs.wezterm}/bin/wezterm";
+          "Super+Return".action = spawn terminal;
           "Super+Shift+Return".action = spawn "google-chrome-stable";
 
           "Super+N".action = sh "dms ipc call widget toggle notificationButton";
@@ -386,17 +400,17 @@ in
       };
     };
 
-    xdg.configFile.niri-config.enable = lib.mkForce false;
+    #xdg.configFile.niri-config.enable = lib.mkForce false;
 
-    xdg.configFile."niri/config.kdl" = lib.mkForce {
-      enable = true;
-      text = ''
-        //DMS integration
-        include "dms/colors.kdl"
+    # xdg.configFile."niri/config.kdl" = lib.mkForce {
+    #   enable = true;
+    #   text = ''
+    #     //DMS integration
+    #     include "dms/colors.kdl"
 
-        ${niriCfg}
-      '';
-    };
+    #     ${niriCfg}
+    #   '';
+    # };
     
     xdg.portal = {
       enable = true;

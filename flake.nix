@@ -21,11 +21,14 @@
     dgop.url = "github:AvengeMedia/dgop";
     dgop.inputs.nixpkgs.follows = "nixpkgs";
 
+    dsearch.url = "github:AvengeMedia/danksearch";
+    dsearch.inputs.nixpkgs.follows = "nixpkgs";
+
     awelauncher.url = "github:enqack/awelauncher";
     awelauncher.inputs.nixpkgs.follows = "nixpkgs";    
   };
 
-  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, stylix, niri, dms, dgop, awelauncher, ... }:
+  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, stylix, niri, dms, dgop, dsearch, awelauncher, ... }:
   let
     lib = nixpkgs.lib;
 
@@ -104,8 +107,9 @@
           modules = [
             # Shared stack (keep your existing behavior)
             niri.homeModules.niri
-            dms.homeModules.dankMaterialShell.default
-            dms.homeModules.dankMaterialShell.niri
+            dms.homeModules.dank-material-shell
+            dms.homeModules.niri
+            dsearch.homeModules.default
             niri.homeModules.stylix
             stylix.homeModules.stylix
 

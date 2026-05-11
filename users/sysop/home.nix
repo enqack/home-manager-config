@@ -85,8 +85,14 @@
     ruff
     ty
     uv
+    pyright
     #/ py dev
 
+    claude-code
+    claude-monitor
+    ollama-cuda
+    
+    discord
     faircamp
     go
     gopls
@@ -97,7 +103,8 @@
     jetbrains.dataspell
     jetbrains.datagrip
     jetbrains.goland
-    jetbrains.pycharm-professional
+    jetbrains.pycharm
+    jetbrains.rider
     jetbrains.rust-rover
     jetbrains.webstorm
     libgtop
@@ -110,6 +117,8 @@
     tytools
     terminator
   ];
+
+  programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gopls ]);
 
   home.file.".config/zsh/.zshrc" = {
     text = ''
@@ -181,7 +190,7 @@
             position.x = 0;
             position.y = 0;
         };
-        "DP-2" = {
+        "DP-5" = {
             mode = {
               height = 1440;
               width = 3440;

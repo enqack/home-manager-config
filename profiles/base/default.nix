@@ -102,6 +102,7 @@
     ../../modules/applications/hyprpaper
     ../../modules/applications/hyprstart
     ../../modules/applications/lf
+    ../../modules/applications/nushell
 
     ../../git-config.nix
   ];
@@ -115,6 +116,10 @@
     wezterm.enable = true;
     wlogout.enable = true;
     zsh.enable = true;
+    nushell = {
+      enable = true;
+      enableIntegrations = true;
+    };
   };
 }
 
