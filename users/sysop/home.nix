@@ -1,8 +1,8 @@
-{ lib, pkgs, config, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
-    ../../profiles/base
+    ../../profiles/linux
 
     ../../git-config.nix
   ];
@@ -133,8 +133,7 @@
   };
 
   xdg.configFile."Yubico/u2f_keys" = {
-    text = ''
-    '';
+    text = "";
   };
 
   systemd.user.services = {
@@ -180,26 +179,26 @@
   modules.applications.niri = {
     enable = true;
     outputs = {
-        "DP-1" = {
-            mode = {
-              height = 1440;
-              width = 3440;
-              refresh = 99.998;
-            };
-            focus-at-startup = false;
-            position.x = 0;
-            position.y = 0;
+      "DP-1" = {
+        mode = {
+          height = 1440;
+          width = 3440;
+          refresh = 99.998;
         };
-        "DP-5" = {
-            mode = {
-              height = 1440;
-              width = 3440;
-              refresh = 120.0;
-            };
-            focus-at-startup = true;
-            position.x = 0;
-            position.y = 1440;
+        focus-at-startup = false;
+        position.x = 0;
+        position.y = 0;
+      };
+      "DP-5" = {
+        mode = {
+          height = 1440;
+          width = 3440;
+          refresh = 120.0;
         };
+        focus-at-startup = true;
+        position.x = 0;
+        position.y = 1440;
+      };
     };
   };
 }

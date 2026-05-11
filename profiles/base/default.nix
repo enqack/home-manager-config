@@ -1,29 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 {
   home.stateVersion = "24.11";
 
   nixpkgs.config.allowUnfree = true;
 
-  xdg = {
-    enable = true;
-    autostart.enable = true;
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-    };
-  };
-
   home.sessionVariables = {
     PATH = "$PATH:~/.local/bin";
     BAT_THEME = "twodark";
-  };
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = lib.mkDefault pkgs.xorg.xcursorthemes;
-    name = lib.mkDefault "redglass";
-    size = lib.mkDefault 64;
   };
 
   programs.gpg = {
@@ -72,54 +60,26 @@
     '';
   };
 
-  home.packages = with pkgs; [
-    adwaita-qt6
-    adwsteamgtk
-  ];
-
-  gtk = {
-    enable = true;
-  };
-
-  qt = {
-    enable = true;
-  };
-
   imports = [
-    ../../modules/applications/alacritty
-    ../../modules/applications/conky
-    #../../modules/applications/home-manager
-    ../../modules/applications/helix
-    #../../modules/applications/hyprland
-    ../../modules/applications/swaync
-    ../../modules/applications/waybar
-    ../../modules/applications/wayfire
-    ../../modules/applications/wezterm
-    ../../modules/applications/wlogout
-    ../../modules/applications/zsh
-
-    ../../modules/applications/niri
-    ../../modules/applications/hyprpaper
-    ../../modules/applications/hyprstart
-    ../../modules/applications/lf
-    ../../modules/applications/nushell
+    
+    ../../modules/shared/applications/alacritty
+    #../../modules/shared/applications/home-manager
+    ../../modules/shared/applications/helix
+    ../../modules/shared/applications/lf
+    ../../modules/shared/applications/wezterm
+    ../../modules/shared/applications/nushell
 
     ../../git-config.nix
   ];
 
   modules.applications = {
     alacritty.enable = true;
-    conky.enable = true;
     helix.enable = true;
     lf.enable = true;
-    swaync.enable = true;
     wezterm.enable = true;
-    wlogout.enable = true;
-    zsh.enable = true;
     nushell = {
       enable = true;
       enableIntegrations = true;
     };
   };
 }
-

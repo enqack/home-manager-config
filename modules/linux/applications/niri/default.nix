@@ -1,8 +1,10 @@
 { config, pkgs, lib, inputs, ... }:
+
 let
   niriCfg = config.programs.niri.finalConfig or "";
   cfg = config.modules.applications.niri;
 in
+
 {
   options.modules.applications.niri = {
     enable = lib.mkEnableOption "niri";
@@ -70,7 +72,7 @@ in
                 id = "focusedWindow";
                 enabled = true;
                 focusedWindowCompactMode = false;
-              }             
+              }
             ];
             centerWidgets = [
               {
@@ -84,7 +86,7 @@ in
               {
                 id = "weather";
                 enabled = true;
-              } 
+              }
             ];
             rightWidgets = [
               {
@@ -423,7 +425,7 @@ in
       ];
       config.common = { "org.freedesktop.impl.portal.FileChooser" = "termfilechooser"; };
     };
-    
+
     xdg.configFile."xdg-desktop-portal-termfilechooser/config" = {
       force = true;
       text =
