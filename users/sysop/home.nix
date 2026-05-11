@@ -91,7 +91,7 @@
     claude-code
     claude-monitor
     ollama-cuda
-    
+
     discord
     faircamp
     go
@@ -115,7 +115,6 @@
     russ
     zscroll
     tytools
-    terminator
   ];
 
   programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gopls ]);

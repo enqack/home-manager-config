@@ -13,6 +13,7 @@
     ../../modules/linux/applications/niri
     ../../modules/linux/applications/hyprstart
     ../../modules/linux/applications/conky
+    ../../modules/linux/applications/zed-editor
   ];
 
   xdg = {
@@ -47,5 +48,6 @@
   modules.applications = {
     zsh.enable = true;
     conky.enable = true;
+    zed-editor.enable = true;
   };
 }
