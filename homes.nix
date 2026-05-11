@@ -26,7 +26,8 @@
       extraModules = [
         niri.homeModules.niri
         dms.homeModules.dank-material-shell
-        dms.homeModules.niri 
+        dms.homeModules.niri
+        dsearch.homeModules.dsearch
         niri.homeModules.stylix
         stylix.homeModules.stylix
       ];
