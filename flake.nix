@@ -15,6 +15,9 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
+    mangowm.url = "github:mangowm/mango";
+    mangowm.inputs.nixpkgs.follows = "nixpkgs";
+
     dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -28,88 +31,113 @@
     awelauncher.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, stylix, niri, dms, dgop, dsearch, awelauncher, ... }:
-  let
-    lib = nixpkgs.lib;
+  outputs =
+    inputs@{
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      stylix,
+      niri,
+      mangowm,
+      dms,
+      dgop,
+      dsearch,
+      awelauncher,
+      ...
+    }:
+    let
+      lib = nixpkgs.lib;
 
-    inventory = import ./homes.nix { inherit niri dms dsearch stylix; };
-    linuxHosts = inventory.linuxHosts;
-    darwinHosts = inventory.darwinHosts;
-    homesRaw = inventory.homes;
-
-    isValidHome =
-      h:
-      lib.isAttrs h
-      && lib.hasAttr "user" h
-      && lib.isString h.user
-      && lib.hasAttr "host" h
-      && lib.isString h.host
-      && lib.hasAttr "system" h
-      && lib.isString h.system
-      && lib.hasAttr "extraModules" h
-      && lib.isList h.extraModules
-      && lib.hasAttr "critical" h
-      && lib.isBool h.critical;
-
-    validHomes = lib.filter isValidHome homesRaw;
-
-    expandWildcards =
-      homes:
-      lib.concatMap (h:
-        if h.host == "*" then
-          let hosts = if lib.hasSuffix "linux" h.system then linuxHosts else darwinHosts;
-          in map (hn: h // { host = hn; }) hosts
-        else [ h ]
-      ) homes;
-
-    expandedHomes = expandWildcards validHomes;
-
-    homeKey = h: "${h.user}@${h.host}";
-
-    dedupeByKeyPreferLast =
-      list:
-      let
-        keys = lib.unique (map homeKey list);
-      in
-      map (k: lib.last (lib.filter (h: homeKey h == k) list)) keys;
-
-    allHomes = dedupeByKeyPreferLast expandedHomes;
-
-    mkPkgs =
-      system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-
-        overlays = [
-          (final: prev: {
-            unstable = import nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          })
-        ];
+      inventory = import ./homes.nix {
+        inherit
+          niri
+          mangowm
+          dms
+          dsearch
+          stylix
+          ;
       };
+      linuxHosts = inventory.linuxHosts;
+      darwinHosts = inventory.darwinHosts;
+      homesRaw = inventory.homes;
 
-    mkHome =
-      h:
-      let
-        pkgs = mkPkgs h.system;
-        hostPath = ./users/${h.user}/hosts/${h.host}.nix;
-        basePath = ./users/${h.user}/home.nix;
-        baseModule = if builtins.pathExists hostPath then hostPath else basePath;
-      in
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      isValidHome =
+        h:
+        lib.isAttrs h
+        && lib.hasAttr "user" h
+        && lib.isString h.user
+        && lib.hasAttr "host" h
+        && lib.isString h.host
+        && lib.hasAttr "system" h
+        && lib.isString h.system
+        && lib.hasAttr "extraModules" h
+        && lib.isList h.extraModules
+        && lib.hasAttr "critical" h
+        && lib.isBool h.critical;
 
-        extraSpecialArgs = {
-          inherit inputs;
-          userName = h.user;
-          hostName = h.host;
+      validHomes = lib.filter isValidHome homesRaw;
+
+      expandWildcards =
+        homes:
+        lib.concatMap (
+          h:
+          if h.host == "*" then
+            let
+              hosts = if lib.hasSuffix "linux" h.system then linuxHosts else darwinHosts;
+            in
+            map (hn: h // { host = hn; }) hosts
+          else
+            [ h ]
+        ) homes;
+
+      expandedHomes = expandWildcards validHomes;
+
+      homeKey = h: "${h.user}@${h.host}";
+
+      dedupeByKeyPreferLast =
+        list:
+        let
+          keys = lib.unique (map homeKey list);
+        in
+        map (k: lib.last (lib.filter (h: homeKey h == k) list)) keys;
+
+      allHomes = dedupeByKeyPreferLast expandedHomes;
+
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+
+          overlays = [
+            (final: prev: {
+              unstable = import nixpkgs-unstable {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            })
+          ];
         };
 
-        modules = [ baseModule ] ++ h.extraModules;
-      };
+      mkHome =
+        h:
+        let
+          pkgs = mkPkgs h.system;
+          hostPath = ./users/${h.user}/hosts/${h.host}.nix;
+          basePath = ./users/${h.user}/home.nix;
+          baseModule = if builtins.pathExists hostPath then hostPath else basePath;
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          extraSpecialArgs = {
+            inherit inputs;
+            userName = h.user;
+            hostName = h.host;
+          };
+
+          modules = [ baseModule ] ++ h.extraModules;
+        };
     in
     {
       homeConfigurations = lib.genAttrs (map homeKey allHomes) (

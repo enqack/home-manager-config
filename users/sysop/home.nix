@@ -117,7 +117,12 @@
     tytools
   ];
 
-  programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gopls ]);
+  programs.vscode.package = pkgs.vscode.fhsWithPackages (
+    ps: with ps; [
+      gcc
+      gopls
+    ]
+  );
 
   home.file.".config/zsh/.zshrc" = {
     text = ''
@@ -199,5 +204,13 @@
         position.y = 1440;
       };
     };
+  };
+
+  modules.applications.mangowm = {
+    enable = true;
+  };
+
+  modules.applications.dank-material-shell = {
+    enable = true;
   };
 }

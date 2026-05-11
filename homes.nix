@@ -1,4 +1,11 @@
-{ niri, dms, dsearch, stylix, ... }:
+{
+  niri,
+  mangowm,
+  dms,
+  dsearch,
+  stylix,
+  ...
+}:
 
 {
   linuxHosts = [
@@ -25,6 +32,7 @@
       system = "x86_64-linux";
       extraModules = [
         niri.homeModules.niri
+        mangowm.hmModules.mango
         dms.homeModules.dank-material-shell
         dms.homeModules.niri
         dsearch.homeModules.dsearch
@@ -41,6 +49,7 @@
       system = "x86_64-linux";
       extraModules = [
         niri.homeModules.niri
+        mangowm.hmModules.mango
         dms.homeModules.dank-material-shell
         dms.homeModules.niri
         dsearch.homeModules.dsearch

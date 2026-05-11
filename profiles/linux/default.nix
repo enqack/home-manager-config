@@ -11,6 +11,8 @@
     ../../modules/shared/applications/zsh
 
     ../../modules/linux/applications/niri
+    ../../modules/linux/applications/mangowm
+    ../../modules/linux/applications/dank-material-shell
     ../../modules/linux/applications/hyprstart
     ../../modules/linux/applications/conky
     ../../modules/linux/applications/zed-editor
