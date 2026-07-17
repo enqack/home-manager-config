@@ -88,9 +88,11 @@
     pyright
     #/ py dev
 
-    claude-code
+    unstable.claude-code
     claude-monitor
     ollama-cuda
+
+    unstable.bitwig-studio6
 
     discord
     faircamp
@@ -207,7 +209,7 @@
   };
 
   modules.applications.mangowm = {
-    enable = true;
+    enable = false;
   };
 
   modules.applications.dank-material-shell = {

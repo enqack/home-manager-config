@@ -421,13 +421,13 @@ let
     source ${nuScriptsRoot}/custom-completions/git/git-completions.nu
     source ${nuScriptsRoot}/custom-completions/nix/nix-completions.nu
     source ${nuScriptsRoot}/custom-completions/cargo/cargo-completions.nu
-    source ${nuScriptsRoot}/custom-completions/podman/podman-completions.nu
+    # source ${nuScriptsRoot}/custom-completions/podman/podman-completions.nu
     source ${nuScriptsRoot}/custom-completions/eza/eza-completions.nu
     source ${nuScriptsRoot}/custom-completions/glow/glow-completions.nu
     source ${nuScriptsRoot}/custom-completions/tar/tar-completions.nu
     source ${nuScriptsRoot}/custom-completions/zoxide/zoxide-completions.nu
     source ${nuScriptsRoot}/aliases/git/git-aliases.nu
-    source ${nuScriptsRoot}/aliases/eza/eza-aliases.nu
+    # source ${nuScriptsRoot}/aliases/eza/eza-aliases.nu
     source ${nuScriptsRoot}/modules/fuzzy/fuzzy_command_search.nu
     source ${nuScriptsRoot}/modules/fuzzy/fuzzy_history_search.nu
     source ${nuScriptsRoot}/modules/background_task/task.nu
@@ -520,7 +520,7 @@ in
         # Integrations (optional)
         ${lib.optionalString cfg.enableIntegrations ''
           source ${nuLibDir}/integrations.nu
-          source ${nuLibDir}/atuin.nu
+          #source ${nuLibDir}/atuin.nu
         ''}
       '';
     };
