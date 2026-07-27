@@ -79,6 +79,7 @@
     # rust dev
     rustc
     cargo
+    rust-analyzer
     #/ rust dev
 
     # py dev
@@ -104,7 +105,7 @@
     jetbrains.clion
     jetbrains.dataspell
     jetbrains.datagrip
-    jetbrains.goland
+    unstable.jetbrains.goland
     jetbrains.pycharm
     jetbrains.rider
     jetbrains.rust-rover
