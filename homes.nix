@@ -2,6 +2,7 @@
   niri,
   mangowm,
   dms,
+  dms-plugin-registry,
   dsearch,
   stylix,
   ...
@@ -34,6 +35,7 @@
         niri.homeModules.niri
         mangowm.hmModules.mango
         dms.homeModules.dank-material-shell
+        dms-plugin-registry.nixosModules.default
         dms.homeModules.niri
         dsearch.homeModules.dsearch
         niri.homeModules.stylix
@@ -51,6 +53,7 @@
         niri.homeModules.niri
         mangowm.hmModules.mango
         dms.homeModules.dank-material-shell
+        dms-plugin-registry.nixosModules.default
         dms.homeModules.niri
         dsearch.homeModules.dsearch
         niri.homeModules.stylix

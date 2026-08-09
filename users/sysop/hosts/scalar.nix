@@ -2,12 +2,10 @@
 
 {
   imports = [
-    ../../profiles/linux
+    ../../../profiles/linux
 
-    ../../git-config.nix
+    ../../../git-config.nix
 
-    inputs.cognosis.homeManagerModules.default
-    inputs.analytica.homeManagerModules.default  
   ];
 
   stylix = {
@@ -16,7 +14,7 @@
     polarity = "dark";
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/shades-of-purple.yaml";
     opacity.terminal = 0.8;
-    image = ./pictures/synthwave-crinkled-paper.png;
+    image = ../pictures/synthwave-crinkled-paper.png;
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.fira-mono;
@@ -66,9 +64,6 @@
 
     typos-lsp
     inputs.claude-desktop.packages.x86_64-linux.claude-desktop-fhs
-    config.services.cognosis.package
-    # psql/pg_dump/pg_restore matching the cognosis-postgres cluster
-    config.services.cognosis.provisionPostgres.package
 
     nodejs
 
@@ -95,7 +90,6 @@
     # rust dev
     rustc
     cargo
-    rust-analyzer
     #/ rust dev
 
     # py dev
@@ -104,8 +98,6 @@
     uv
     pyright
     #/ py dev
-
-    unstable.bitwig-studio6
 
     discord
     faircamp
@@ -117,7 +109,7 @@
     jetbrains.clion
     jetbrains.dataspell
     jetbrains.datagrip
-    unstable.jetbrains.goland
+    jetbrains.goland
     jetbrains.pycharm
     jetbrains.rider
     jetbrains.rust-rover
@@ -144,30 +136,6 @@
     acceleration = "cuda";
   };
   
-  services.cognosis = {
-    enable = true;
-
-    # Postgres 16 + pgvector as a launchd user agent: socket-only, trust
-    # auth in the 0700 data dir at $XDG_STATE_HOME/cognosis/pg, initdb on
-    # first boot, COGNOSIS_DSN defaulted to the socket. Same cluster the
-    # previously hand-rolled agent ran, now owned by the flake module.
-    provisionPostgres.enable = true;
-
-    environment = {
-      COGNOSIS_EMBEDDING_URL = "http://127.0.0.1:11434";
-    };
-  };
-
-  programs.analytics-mcp = {
-    enable = true;
-  };
-  
-  home.file.".config/zsh/.zshrc" = {
-    text = ''
-      eval "$(hugo completion zsh)"
-    '';
-  };
-
   modules.applications.hyprstart = {
     enable = true;
     vtnr = 2;

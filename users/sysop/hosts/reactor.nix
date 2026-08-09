@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../profiles/linux
+    ../../../profiles/linux
 
-    ../../git-config.nix
+    ../../../git-config.nix
   ];
 
   stylix = {
@@ -12,7 +12,7 @@
     autoEnable = false;
     polarity = "dark";
     opacity.terminal = 0.8;
-    image = ./pictures/synthwave-crinkled-paper.png;
+    image = ../pictures/synthwave-crinkled-paper.png;
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.fira-mono;

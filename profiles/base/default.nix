@@ -66,6 +66,7 @@
     #../../modules/shared/applications/home-manager
     ../../modules/shared/applications/helix
     ../../modules/shared/applications/lf
+    ../../modules/shared/applications/paseo
     ../../modules/shared/applications/wezterm
     ../../modules/shared/applications/nushell
 

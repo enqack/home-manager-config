@@ -9,6 +9,12 @@
           name = "enqack";
           email = "enqack@gmail.com";
         };
+
+        url = {
+          "git@github.com:" = {
+            insteadOf = "https://github.com/";
+          };
+        };
       };
     };
     delta.enable = true;

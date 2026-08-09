@@ -153,7 +153,7 @@ in
           {
             matches = [
               {
-                app-id = "org.quickshell$";
+                app-id = "com.danklinux.dms$";
               }
             ];
             open-floating = true;
@@ -208,6 +208,8 @@ in
             "Super+L".action = focus-column-right;
             "Super+Shift+H".action = move-column-left;
             "Super+Shift+L".action = move-column-right;
+            "Super+WheelScrollLeft".action = focus-column-left;
+            "Super+WheelScrollRight".action = focus-column-right;
 
             # Column control
             "Super+Equal".action = set-column-width "-5%";

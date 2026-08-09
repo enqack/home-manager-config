@@ -21,6 +21,9 @@
     dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
 
+    dms-plugin-registry.url = "github:AvengeMedia/dms-plugin-registry";
+    dms-plugin-registry.inputs.nixpkgs.follows = "nixpkgs";
+
     dgop.url = "github:AvengeMedia/dgop";
     dgop.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -29,6 +32,18 @@
 
     awelauncher.url = "github:enqack/awelauncher";
     awelauncher.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
+    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
+
+    cognosis.url = "github:enqack/cognosis";
+    cognosis.inputs.nixpkgs.follows = "nixpkgs";
+
+    analytica.url = "github:enqack/analytica";
+    analytica.inputs.nixpkgs.follows = "nixpkgs";
+
+    paseo.url = "github:getpaseo/paseo";
+    paseo.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -40,9 +55,11 @@
       niri,
       mangowm,
       dms,
+      dms-plugin-registry,
       dgop,
       dsearch,
       awelauncher,
+      claude-desktop,
       ...
     }:
     let
@@ -53,6 +70,7 @@
           niri
           mangowm
           dms
+          dms-plugin-registry
           dsearch
           stylix
           ;

@@ -84,6 +84,10 @@ in
             ];
             rightWidgets = [
               {
+                id = "claudeCodeUsage";
+                enabled = true;
+              }
+              {
                 id = "controlCenterButton";
                 enabled = true;
               }
@@ -178,6 +182,12 @@ in
             rev = "v0.1.0";
             sha256 = "sha256-Ijvu5OYGB1TvElkIcC1659KFBTu/BqUGvGaSoPReVpA=";
           };
+        };
+        bongoCat = {
+          enable = true;
+        };
+        claudeCodeUsage = {
+          enable = true;
         };
       };
     };
