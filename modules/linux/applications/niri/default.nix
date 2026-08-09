@@ -116,6 +116,10 @@ in
         prefer-no-csd = true;
         cursor.theme = "redglass";
         hotkey-overlay.skip-at-startup = true;
+        input = {
+          # Prevents Niri from intercepting the hardware power button
+          power-key-handling.enable = false;
+        };
         outputs = cfg.outputs;
         layer-rules = [
           {
@@ -261,6 +265,7 @@ in
             "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
             "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
             "XF86AudioMute".action = sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            "XF86PowerOff".action = sh "dms ipc call powermenu toggle";
           };
       };
     };
