@@ -72,23 +72,23 @@ in
           gaps = 10;
           border = {
             enable = true;
-            width = 2;
-            #active.color = "#f92a1c";
+            width = 1;
+            active.color = "#f92a1c";
             #inactive.color = "#6943ff";
             #urgent.color = "#ffe700";
           };
           focus-ring = {
             enable = false;
-            width = 2;
-            #active.color = "#065738";
+            width = 1;
+            active.color = "#ff3700"; 
             #inactive.color = "#6943ff";
-            #urgent.color = "#ffe700";
+            #urgent.color = "\${config.lib.stylix.colors.base02}";
           };
           shadow = {
             enable = true;
             offset = {
-              x = 10;
-              y = 10;
+              x = 20;
+              y = 20;
             };
             draw-behind-window = true;
           };

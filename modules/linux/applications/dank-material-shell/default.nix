@@ -24,10 +24,11 @@ in
 
     programs.dank-material-shell = {
       enable = true;
+      niri.includes.override = false;
       dgop.package = inputs.dgop.packages.x86_64-linux.dgop;
 
       settings = {
-        theme = "blue";
+        theme = "purple";
         matugenScheme = "scheme-monochrome";
         runUserMatugenTemplates = true;
         widgetColorMode = "colorful";
@@ -96,7 +97,7 @@ in
                 enabled = true;
               }
             ];
-            spacing = 12;
+            spacing = 10;
             innerPadding = 4;
             bottomGap = 0;
             transparency = 0.7;
@@ -137,7 +138,7 @@ in
                 minimumWidth = true;
               }
             ];
-            spacing = 12;
+            spacing = 10;
             innerPadding = 4;
             bottomGap = 0;
             transparency = 0.7;
@@ -159,7 +160,6 @@ in
 
       enableSystemMonitoring = true;
       enableVPN = true;
-      #enableClipboard = true;
       enableDynamicTheming = true;
       enableAudioWavelength = true;
       enableCalendarEvents = true;
