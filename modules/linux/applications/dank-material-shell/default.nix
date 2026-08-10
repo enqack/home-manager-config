@@ -114,7 +114,7 @@ in
             position = 1;
             screenPreferences = [
               {
-                name = "DP-5";
+                name = "HDMI-A-2";
               }
             ];
             showOnLastDisplay = false;

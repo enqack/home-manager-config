@@ -5,9 +5,6 @@
     ../../profiles/linux
 
     ../../git-config.nix
-
-    inputs.cognosis.homeManagerModules.default
-    inputs.analytica.homeManagerModules.default  
   ];
 
   stylix = {
@@ -57,19 +54,6 @@
 
   home.packages = with pkgs; [
     base16-schemes
-
-    unstable.antigravity-cli
-    unstable.antigravity-ide-fhs
-
-    unstable.claude-code
-    claude-monitor    
-
-    typos-lsp
-    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-fhs
-    config.services.cognosis.package
-    # psql/pg_dump/pg_restore matching the cognosis-postgres cluster
-    config.services.cognosis.provisionPostgres.package
-
     nodejs
 
     # c dev
@@ -108,20 +92,11 @@
     unstable.bitwig-studio6
 
     discord
-    faircamp
     go
     gopls
     hugo
     inkscape
-    jetbrains-toolbox
-    jetbrains.clion
-    jetbrains.dataspell
-    jetbrains.datagrip
-    unstable.jetbrains.goland
-    jetbrains.pycharm
-    jetbrains.rider
-    jetbrains.rust-rover
-    jetbrains.webstorm
+
     libgtop
     obsidian
     youtube-music
@@ -138,29 +113,6 @@
       gopls
     ]
   );
-
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
-  
-  services.cognosis = {
-    enable = true;
-
-    # Postgres 16 + pgvector as a launchd user agent: socket-only, trust
-    # auth in the 0700 data dir at $XDG_STATE_HOME/cognosis/pg, initdb on
-    # first boot, COGNOSIS_DSN defaulted to the socket. Same cluster the
-    # previously hand-rolled agent ran, now owned by the flake module.
-    provisionPostgres.enable = true;
-
-    environment = {
-      COGNOSIS_EMBEDDING_URL = "http://127.0.0.1:11434";
-    };
-  };
-
-  programs.analytics-mcp = {
-    enable = true;
-  };
   
   home.file.".config/zsh/.zshrc" = {
     text = ''
@@ -178,50 +130,10 @@
     text = "";
   };
 
-  systemd.user.services = {
-    enqack-net-dev = {
-      Unit = {
-        Description = "Serve enqack.net hugo development environment";
-      };
-
-      Install = {
-        WantedBy = [ "multi-user.target" ];
-      };
-
-      Service = {
-        WorkingDirectory = "%h/Projects/enqack-website";
-        ExecStart = ''
-          ${pkgs.hugo}/bin/hugo server \
-            --buildDrafts \
-            --buildExpired \
-            --buildFuture
-        '';
-      };
-    };
-  };
-
-  systemd.user.services = {
-    nestops-sysman = {
-      Unit = {
-        Description = "Serve NestOps System Manual";
-      };
-
-      Service = {
-        WorkingDirectory = "%h/NestOps/nestops-sysman";
-        ExecStart = ''
-          ${pkgs.hugo}/bin/hugo server \
-            --buildDrafts \
-            --buildExpired \
-            --buildFuture
-        '';
-      };
-    };
-  };
-
   modules.applications.niri = {
     enable = true;
     outputs = {
-      "DP-1" = {
+      "DP-2" = {
         mode = {
           height = 1440;
           width = 3440;
@@ -231,11 +143,11 @@
         position.x = 0;
         position.y = 0;
       };
-      "DP-5" = {
+      "HDMI-A-2" = {
         mode = {
           height = 1440;
           width = 3440;
-          refresh = 120.0;
+          refresh = 100.002;
         };
         focus-at-startup = true;
         position.x = 0;
@@ -250,47 +162,5 @@
 
   modules.applications.dank-material-shell = {
     enable = true;
-  };
-
-  modules.applications.paseo = {
-    enable = true;
-    
-
-    # The daemon runs with a pinned PATH and does not inherit the login
-    # shell's, so an agent CLI that is not listed here reports "unavailable"
-    # in `paseo provider ls` and in the GUI - even though it is installed
-    # above and works fine in a terminal.
-    agentPackages = [ pkgs.unstable.claude-code ];
-
-    # All speech on-device. No key material, so no environmentFile needed;
-    # the ONNX models download once at daemon startup into modelsDir.
-    voice = {
-      dictation.stt = {
-        provider = "local";
-        model = "parakeet-tdt-0.6b-v2-int8";
-      };
-
-      voiceMode = {
-        # Reuses the claude-code CLI already listed in agentPackages. A
-        # provider the daemon cannot execute is unusable here too.
-        llm = {
-          provider = "claude";
-          model = "haiku";
-        };
-
-        stt = {
-          provider = "local";
-          model = "parakeet-tdt-0.6b-v2-int8";
-        };
-
-        tts = {
-          provider = "local";
-          model = "kokoro-en-v0_19";
-          speakerId = 0;
-        };
-      };
-
-      providers.local.modelsDir = "${config.home.homeDirectory}/.paseo/models/local-speech";
-    };
   };
 }

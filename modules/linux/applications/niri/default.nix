@@ -168,6 +168,28 @@ in
               fixed = 1000;
             };
           }
+          {
+            matches = [
+              {
+                app-id = "^steam$";
+                title = "^Steam Big Picture Mode$";
+              }
+              {
+                app-id = "^steam$";
+                title = "^Steam$";
+              }
+            ];
+            open-maximized = true;
+          }
+          {
+            matches = [
+              {
+                app-id = "^steam$";
+                title = "^(notificationtoasts.*|Steam Keyboard|QuickAccess.*|Menu.*|overlay.*)$";
+              }
+            ];
+            open-floating = true;
+          }
         ];
         binds =
           with config.lib.niri.actions;
